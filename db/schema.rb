@@ -10,21 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315013117) do
+ActiveRecord::Schema.define(version: 20170318024747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bills", force: :cascade do |t|
     t.integer  "day"
-    t.date     "start"
-    t.date     "end"
+    t.date     "start_date"
+    t.date     "end_date"
     t.boolean  "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["active"], name: "index_bills_on_active", using: :btree
-    t.index ["end"], name: "index_bills_on_end", using: :btree
-    t.index ["start"], name: "index_bills_on_start", using: :btree
+    t.index ["end_date"], name: "index_bills_on_end_date", using: :btree
+    t.index ["start_date"], name: "index_bills_on_start_date", using: :btree
   end
 
 end
