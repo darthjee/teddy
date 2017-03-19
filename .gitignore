@@ -21,3 +21,4 @@
 .byebug_history
 
 /vendor/assets/bower_components/
+/coverage
