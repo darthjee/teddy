@@ -18,19 +18,35 @@ describe Bill do
       end
       let(:start_date) { Date.new(2017,03,01) }
       let(:end_date) { Date.new(2017,03,31) }
+      let(:bills_of_month) { described_class.for_month(Date.today) }
       let(:first_start_date) do
-        described_class.for_month(Date.today).order(:start_date).distinct.pluck(:start_date).first
+        bills_of_month.order(:start_date).distinct.pluck(:start_date).first
       end
       let(:last_end_date) do
-        described_class.for_month(Date.today).order(:end_date).distinct.pluck(:end_date).last
+        bills_of_month.order(:end_date).distinct.pluck(:end_date).last
       end
+      let(:active) { bills(:active) }
+      let(:expired) { bills(:expired) }
+      let(:not_started) { bills(:not_started) }
 
       it 'returns only the bills for this month' do
         expect(first_start_date).to be >= start_date
         expect(last_end_date).to be <= end_date
       end
 
-      context 'when start_date has not been defined' do
+      it 'returns the bill for the current month' do
+        expect(bills_of_month).to include(active)
+      end
+
+      it 'does not return the bill for the previous month' do
+        expect(bills_of_month).not_to include(expired)
+      end
+
+      it 'does not return the bill for the previous month' do
+        expect(bills_of_month).not_to include(not_started)
+      end
+
+      context 'when month range has a bill with no start_date (previeous month)' do
         before do
           Timecop.freeze(2017,02,10)
         end
@@ -39,6 +55,18 @@ describe Bill do
         it 'is accepted as any date' do
           expect(first_start_date).to be_nil
           expect(last_end_date).to be <= end_date
+        end
+
+        it 'does not return the bill for the current month' do
+          expect(bills_of_month).not_to include(active)
+        end
+
+        it 'returns the bill for the previous month' do
+          expect(bills_of_month).to include(expired)
+        end
+
+        it 'does not return the bill for the previous month' do
+          expect(bills_of_month).not_to include(not_started)
         end
       end
 
@@ -51,6 +79,18 @@ describe Bill do
         it 'is accepted as any date' do
           expect(first_start_date).to be >= start_date
           expect(last_end_date).to be_nil
+        end
+
+        it 'does not returns the bill for the current month' do
+          expect(bills_of_month).not_to include(active)
+        end
+
+        it 'does not return the bill for the previous month' do
+          expect(bills_of_month).not_to include(expired)
+        end
+
+        it 'returns the bill for the previous month' do
+          expect(bills_of_month).to include(not_started)
         end
       end
     end

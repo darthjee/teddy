@@ -8,7 +8,7 @@ expired:
   start_date:
   end_date: 2017-02-28
 
-not_start_dateed:
+not_started:
   active: true
   start_date: 2017-04-01
   end_date:
