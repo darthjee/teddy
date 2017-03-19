@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Bill do
   describe 'scopes' do
-    describe 'default' do
+    describe 'active' do
       it 'has a default scope' do
-        expect(described_class.count).not_to be(described_class.unscoped.count)
+        expect(described_class.active.count).not_to be(described_class.count)
       end
 
       it 'returns only active' do
-        expect(described_class.distinct.pluck(:active)).to eq([true])
+        expect(described_class.active.distinct.pluck(:active)).to eq([true])
       end
     end
 
@@ -18,7 +18,7 @@ describe Bill do
       end
       let(:start_date) { Date.new(2017,03,01) }
       let(:end_date) { Date.new(2017,03,31) }
-      let(:bills_of_month) { described_class.for_month(Date.today) }
+      let(:bills_of_month) { described_class.active.for_month(Date.today) }
       let(:first_start_date) do
         bills_of_month.order(:start_date).distinct.pluck(:start_date).first
       end
