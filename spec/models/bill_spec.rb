@@ -29,6 +29,30 @@ describe Bill do
         expect(first_start_date).to be >= start_date
         expect(last_end_date).to be <= end_date
       end
+
+      context 'when start_date has not been defined' do
+        before do
+          Timecop.freeze(2017,02,10)
+        end
+        let(:end_date) { Date.new(2017,02,28) }
+
+        it 'is accepted as any date' do
+          expect(first_start_date).to be_nil
+          expect(last_end_date).to be <= end_date
+        end
+      end
+
+      context 'when end_date has not been defined' do
+        before do
+          Timecop.freeze(2017,04,10)
+        end
+        let(:start_date) { Date.new(2017,04,01) }
+
+        it 'is accepted as any date' do
+          expect(first_start_date).to be >= start_date
+          expect(last_end_date).to be_nil
+        end
+      end
     end
   end
 end
