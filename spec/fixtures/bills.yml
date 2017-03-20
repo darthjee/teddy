@@ -1,17 +1,21 @@
 active:
   active: true
+  day: 10
   start_date: 2017-03-01
   end_date: 2017-03-30
 
 expired:
   active: true
+  day: 11
   start_date:
   end_date: 2017-02-28
 
 not_started:
   active: true
+  day: 12
   start_date: 2017-04-01
   end_date:
 
 inactive:
+  day: 13
   active: false

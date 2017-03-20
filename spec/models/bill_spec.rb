@@ -95,4 +95,18 @@ describe Bill do
       end
     end
   end
+
+  describe '#build_payment' do
+    before do
+      Timecop.freeze(2017,03,10)
+    end
+    let(:subject) { bills(:active) }
+    let(:month_date) { Date.today }
+
+    it do
+      expect do
+        subject.build_payment(month_date)
+      end.to change(Payment, :count)
+    end
+  end
 end
