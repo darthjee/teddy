@@ -1,5 +1,17 @@
 require 'spec_helper'
 
-RSpec.describe Payment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Payment do
+  describe 'validations' do
+    let(:bill) { bills(:active) }
+    let(:attributes) do
+      {
+        due_date: Date.today,
+        bill: bill
+      }
+    end
+    let(:subject) { described_class.new(attributes) }
+
+    it { expect(subject).to validate_presence_of(:bill) }
+    it { expect(subject).to validate_presence_of(:due_date) }
+  end
 end
