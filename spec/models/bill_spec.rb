@@ -95,4 +95,35 @@ describe Bill do
       end
     end
   end
+
+  describe 'validations' do
+    let(:attributes) do
+      {
+        active: :true,
+        start_date: Date.today,
+        end_date: Date.today,
+        day: 10
+      }
+    end
+    let(:subject) { described_class.new(attributes) }
+
+    it { expect(subject).not_to validate_presence_of(:active) }
+    it { expect(subject).not_to validate_presence_of(:start_date) }
+    it { expect(subject).not_to validate_presence_of(:end_date) }
+    it { expect(subject).to validate_presence_of(:day) }
+  end
+
+  describe '#build_payment' do
+    before do
+      Timecop.freeze(2017,03,10)
+    end
+    let(:subject) { bills(:active) }
+    let(:month_date) { Date.today }
+
+    it do
+      expect do
+        subject.build_payment(month_date)
+      end.to change(Payment, :count)
+    end
+  end
 end

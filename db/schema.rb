@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170318024747) do
+ActiveRecord::Schema.define(version: 20170319234347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,4 +27,11 @@ ActiveRecord::Schema.define(version: 20170318024747) do
     t.index ["start_date"], name: "index_bills_on_start_date", using: :btree
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.date     "due_date"
+    t.integer  "bill_id"
+    t.boolean  "paid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 end
