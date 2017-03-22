@@ -5,5 +5,6 @@ describe User do
 
   describe '#bills' do
     it { expect(subject).to respond_to(:bills) }
+    it { expect(subject.bills).not_to be_empty }
   end
 end
