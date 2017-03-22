@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Bill do
   describe 'scopes' do
     describe 'active' do
-      it 'has a default scope' do
+      it 'scope exist' do
         expect(described_class.active.count).not_to be(described_class.count)
       end
 
