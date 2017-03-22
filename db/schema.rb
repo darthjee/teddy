@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(version: 20170322215735) do
   create_table "bills_users", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "bill_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "active"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "active",     default: true
   end
 
   create_table "payments", force: :cascade do |t|
