@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322215735) do
+ActiveRecord::Schema.define(version: 20170323183510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,12 +29,9 @@ ActiveRecord::Schema.define(version: 20170322215735) do
     t.index ["user_id"], name: "index_bills_on_user_id", using: :btree
   end
 
-  create_table "bills_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "bill_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.boolean  "active",     default: true
+  create_table "bills_users", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "bill_id"
   end
 
   create_table "payments", force: :cascade do |t|
