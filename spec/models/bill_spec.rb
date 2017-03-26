@@ -98,16 +98,7 @@ describe Bill do
 
   describe 'validations' do
     let(:user) { users(:default) }
-    let(:attributes) do
-      {
-        active: :true,
-        start_date: Date.today,
-        end_date: Date.today,
-        day: 10,
-        user: user
-      }
-    end
-    let(:subject) { described_class.new(attributes) }
+    let(:subject) { build :bill, user: user }
 
     it { expect(subject).not_to validate_presence_of(:active) }
     it { expect(subject).not_to validate_presence_of(:start_date) }
