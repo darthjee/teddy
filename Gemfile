@@ -64,3 +64,4 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'listen'
+gem 'devise'

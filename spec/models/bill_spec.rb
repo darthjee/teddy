@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Bill do
   describe 'scopes' do
     describe 'active' do
-      it 'has a default scope' do
+      it 'scope exist' do
         expect(described_class.active.count).not_to be(described_class.count)
       end
 
@@ -97,20 +97,14 @@ describe Bill do
   end
 
   describe 'validations' do
-    let(:attributes) do
-      {
-        active: :true,
-        start_date: Date.today,
-        end_date: Date.today,
-        day: 10
-      }
-    end
-    let(:subject) { described_class.new(attributes) }
+    let(:user) { users(:default) }
+    let(:subject) { build :bill, user: user }
 
     it { expect(subject).not_to validate_presence_of(:active) }
     it { expect(subject).not_to validate_presence_of(:start_date) }
     it { expect(subject).not_to validate_presence_of(:end_date) }
     it { expect(subject).to validate_presence_of(:day) }
+    it { expect(subject).to validate_presence_of(:user) }
   end
 
   describe '#build_payment' do
