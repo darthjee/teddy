@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require underscore
+//= require angular/angular
+//= require angular-route/angular-route
+//= require querystring
+//= require md5
 //= require_tree .
