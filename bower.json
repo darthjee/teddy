@@ -1,11 +1,11 @@
 {
   "lib": {
-    "name": "bower-rails generated lib assets",
+    "name": "teddy-libs",
     "dependencies": {
     }
   },
   "vendor": {
-    "name": "bower-rails generated vendor assets",
+    "name": "teddy-assets",
     "dependencies": {
       "angular": "latest",
       "angular-route": "latest",
