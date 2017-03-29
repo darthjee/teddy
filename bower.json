@@ -1,14 +1,19 @@
 {
-  "name": "dsl-generated dependencies",
-  "dependencies": {
-    "angular": "latest",
-    "angular-route": "latest",
-    "underscore": "latest",
-    "angular-ui-select2": "latest",
-    "bootstrap-sass": "latest",
-    "angular-route": "latest",
-    "angular-bootstrap-colorpicker": "latest",
-    "querystring": "latest",
-    "md5": "latest"
+  "lib": {
+    "name": "teddy-libs",
+    "dependencies": {
+    }
+  },
+  "vendor": {
+    "name": "teddy-assets",
+    "dependencies": {
+      "angular": "1.6.3",
+      "angular-route": "1.6.3",
+      "underscore": "1.8.3",
+      "bootstrap-sass": "3.3.7",
+      "bootstrap": "3.3.7",
+      "querystring": "3.46.1",
+      "md5": "0.4.2"
+    }
   }
 }
