@@ -7,14 +7,13 @@
   "vendor": {
     "name": "teddy-assets",
     "dependencies": {
-      "angular": "latest",
-      "angular-route": "latest",
-      "underscore": "latest",
-      "bootstrap-sass": "latest",
-      "bootstrap": "latest",
-      "angular-route": "latest",
-      "querystring": "latest",
-      "md5": "latest"
+      "angular": "1.6.3",
+      "angular-route": "1.6.3",
+      "underscore": "1.8.3",
+      "bootstrap-sass": "3.3.7",
+      "bootstrap": "3.3.7",
+      "querystring": "3.46.1",
+      "md5": "0.4.2"
     }
   }
 }
