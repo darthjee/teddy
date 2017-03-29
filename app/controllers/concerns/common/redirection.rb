@@ -11,7 +11,7 @@ module Common::Redirection
   private
 
   def render_root
-    "##{request.path}"
+    "#!#{request.path}"
   end
 
   def is_home?

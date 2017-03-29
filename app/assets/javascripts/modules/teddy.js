@@ -1,5 +1,6 @@
 (function(angular) {
   var module = angular.module('teddy', [
+    'ngRoute',
     'global'
   ]);
 
