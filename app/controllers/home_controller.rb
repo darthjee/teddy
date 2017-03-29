@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def show
-    render inline: 'aaa', layout: true
+    render inline: '', layout: true
   end
 end
