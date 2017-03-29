@@ -1,5 +1,6 @@
 class CalendarController < ApplicationController
   include Common::User
+  include Common::Redirection
 
   delegate :beginning_of_month, :end_of_month, to: :month_date
 
