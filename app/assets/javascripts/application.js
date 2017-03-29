@@ -17,4 +17,5 @@
 //= require angular-route/angular-route
 //= require querystring
 //= require md5
+//= require bootstrap
 //= require_tree .
