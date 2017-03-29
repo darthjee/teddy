@@ -6,10 +6,15 @@ class CalendarController < ApplicationController
   DAYS_PER_WEEK=7
 
   def index
-    @days = (beginning_of_month..end_of_month)
+    @days = (beginning_of_month..end_of_month).to_a
+    render_basic
   end
 
   private
+
+  def index_json
+    @days.as_json
+  end
 
   def month_date
     @month_date ||= Date.new(year, month, 1)
