@@ -1,7 +1,6 @@
 (function(_, angular, undefined) {
 
   function Router($routeProvider) {
-    window.a = arguments;
     this.provider = $routeProvider;
   }
 
@@ -20,7 +19,9 @@
 
     _.each(router.directRoutes, function(route) {
       router.provider.when(route, {
-        templateUrl: router.buildTemplateFor(route)
+        templateUrl: router.buildTemplateFor(route),
+        controller: 'GenericController',
+        controllerAs: 'controller'
       });
     });
 
