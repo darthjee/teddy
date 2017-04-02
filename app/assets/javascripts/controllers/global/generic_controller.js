@@ -17,8 +17,8 @@
     promise.then(this._setData);
   };
 
-  fn._setData = function(config, data) {
-    this.data = data;
+  fn._setData = function(response) {
+    this.data = response.data;
   };
 
   app.controller('GenericController', [

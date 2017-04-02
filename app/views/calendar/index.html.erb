@@ -1,7 +1,5 @@
 <table>
-  <%= @days.each do |d| %>
-    <tr>
-      <td><%= d %></td>
-    </tr>
-  <% end %>
+  <tr ng-repeat="date in controller.data">
+    <td>{{ date }}</td>
+  </tr>
 </table>
