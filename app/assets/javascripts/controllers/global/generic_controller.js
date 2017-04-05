@@ -1,7 +1,6 @@
 (function(_, angular) {
-  function GenericController($location, $http) {
-    this.path = $location.$$path + '.json';
-    this.http = $http;
+  function GenericController(requester) {
+    this.requester = requester;
 
     _.bindAll(this, '_setData');
 
@@ -10,10 +9,11 @@
 
   var fn = GenericController.prototype,
       app = angular.module('global/generic_controller', [
+        'global/generic_requester'
       ]);
 
   fn.request = function() {
-    var promise = this.http.get(this.path);
+    var promise = this.requester.request();
     promise.then(this._setData);
   };
 
@@ -22,7 +22,7 @@
   };
 
   app.controller('GenericController', [
-    '$location','$http',
+    'generic_requester',
     GenericController
   ]);
 })(window._, window.angular);
