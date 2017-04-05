@@ -9,12 +9,12 @@ class Bill < ApplicationRecord
 
   validates_presence_of :day, :user
 
-  def build_payment(month_date)
+  def build_payment(month_date = Date.today)
     due_date = (month_date.beginning_of_month - 1.day) + day.days
     payments.build(due_date: due_date)
   end
 
-  def create_payment(month_date)
+  def create_payment(month_date = Date.today)
     build_payment(month_date).save
   end
 end

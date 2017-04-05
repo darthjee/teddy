@@ -129,7 +129,7 @@ describe Bill do
     let(:month_date) { Date.today }
     let(:beginning_of_month) { month_date.beginning_of_month }
     let(:end_of_month) { month_date.end_of_month }
-    let(:built_payment) { subject.build_payment(month_date) }
+    let(:built_payment) { subject.build_payment(month_date + 1.month) }
 
     it do
       expect do
@@ -141,8 +141,18 @@ describe Bill do
       expect(built_payment.due_date.day).to eq(subject.day)
     end
 
-    it do
-      expect(built_payment.due_date).to be_between(beginning_of_month, end_of_month)
+    it 'does not create for current date' do
+      expect(built_payment.due_date).not_to be_between(beginning_of_month, end_of_month)
+    end
+
+    it 'creates for month given date' do
+      expect(built_payment.due_date).to be_between(beginning_of_month + 1.month, end_of_month + 1.month)
+    end
+
+    context 'when date is not supplied' do
+      it 'creates for the current month' do
+        expect(subject.build_payment.due_date).to be_between(beginning_of_month, end_of_month)
+      end
     end
   end
 end
