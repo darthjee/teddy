@@ -41,7 +41,10 @@
     var firstDay = this.beginningOfWeek;
 
     return _.times(7, function(weekDay) {
-      return firstDay.addDays(week * 7 + weekDay);
+      var date = firstDay.addDays(week * 7 + weekDay);
+      return {
+        day: date.getDate()
+      }
     });
   };
 
