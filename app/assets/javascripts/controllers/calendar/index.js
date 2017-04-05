@@ -21,6 +21,8 @@
   fn._setData = function(response) {
     this.start = Date.fromString(response.data.start);
     this.end = Date.fromString(response.data.end);
+    this.beginningOfWeek = this.start.beginningOfWeek();
+    this.endOfWeek = this.end.endOfWeek();
   };
 
   app.controller('CalendarIndexController', [

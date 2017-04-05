@@ -15,5 +15,15 @@
 
     return new Date(year, month, day);
   };
+
+  fn.beginningOfWeek = function() {
+    var delta = - this.getDay();
+    return this.addDays(delta);
+  };
+
+  fn.endOfWeek = function() {
+    var delta = 6 - this.getDay();
+    return this.addDays(delta);
+  };
 })(Date, window._);
 
