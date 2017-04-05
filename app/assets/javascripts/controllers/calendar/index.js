@@ -6,12 +6,20 @@
     _.bindAll(this, '_setData', '_buildWeek');
 
     this.request();
+    this._buildWeekHeader();
   }
 
   var fn = CalendarIndexController.prototype,
       app = angular.module('calendar/index', [
         'global/generic_requester', 'global/notifier'
       ]);
+
+  fn._buildWeekHeader = function() {
+    var base = new Date().beginningOfWeek();
+    this.weekHeader = _.times(7, function(days) {
+      return base.addDays(days).toLocaleFormat('%a');
+    })
+  };
 
   fn.request = function() {
     var promise = this.requester.request();
