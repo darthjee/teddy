@@ -10,8 +10,9 @@
 
   var fn = Router.prototype;
 
-  fn.directRoutes = ['/year/:year/month/:month'];
+  fn.directRoutes = [];
   fn.customRoutes = {
+    '/year/:year/month/:month': { controller: 'CalendarIndexController', controllerAs: 'controller' }
   };
 
   fn.bindRoutes = function() {

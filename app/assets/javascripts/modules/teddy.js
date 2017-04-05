@@ -1,7 +1,7 @@
 (function(angular) {
   var module = angular.module('teddy', [
     'ngRoute',
-    'global'
+    'global', 'calendar'
   ]);
 
   module.config(['$httpProvider', function($httpProvider) {
