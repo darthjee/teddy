@@ -1,5 +1,7 @@
 <table>
-  <tr ng-repeat="date in controller.dates">
-    <td>{{ date }}</td>
+  <tr ng-repeat="week in controller.calendar">
+    <td ng-repeat="date in week">
+      {{ date }}
+    </td>
   </tr>
 </table>

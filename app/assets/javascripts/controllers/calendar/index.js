@@ -3,7 +3,7 @@
     this.requester = requester;
     this.notifier = notifier;
 
-    _.bindAll(this, '_setData');
+    _.bindAll(this, '_setData', '_buildWeek');
 
     this.request();
   }
@@ -22,7 +22,27 @@
     this.start = Date.fromString(response.data.start);
     this.end = Date.fromString(response.data.end);
     this.beginningOfWeek = this.start.beginningOfWeek();
-    this.endOfWeek = this.end.endOfWeek();
+    this.weeks = this._calculateWeeks();
+
+    this._buildCalendar();
+  };
+
+  fn._calculateWeeks = function() {
+    var start = this.beginningOfWeek,
+        end = this.end.endOfWeek().addDays(1);
+    return start.weeksUntil(end);
+  };
+
+  fn._buildCalendar = function() {
+    this.calendar = _.times(this.weeks, this._buildWeek);
+  };
+
+  fn._buildWeek = function(week) {
+    var firstDay = this.beginningOfWeek;
+
+    return _.times(7, function(weekDay) {
+      return firstDay.addDays(week * 7 + weekDay);
+    });
   };
 
   app.controller('CalendarIndexController', [
