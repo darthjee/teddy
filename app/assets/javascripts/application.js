@@ -18,4 +18,5 @@
 //= require querystring
 //= require md5
 //= require bootstrap
+//= require modules/teddy
 //= require_tree .
