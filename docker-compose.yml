@@ -39,5 +39,10 @@ services:
     environment:
       - RAILS_ENV=test
 
+networks:
+  default:
+    external:
+      name: teddy
+
 volumes:
   teddy_gems_2_4_0:
