@@ -8,4 +8,4 @@ bundle install --clean
 
 bundle exec rake db:create db:migrate db:seed
 
-bundle exec rails s
+bundle exec rails s -b 0.0.0.0
