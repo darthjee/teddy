@@ -1,0 +1,43 @@
+version: '2'
+services:
+  teddy_postgres:
+    image: postgres:9.5
+    container_name: teddy_postgres
+    environment:
+      POSTGRES_USER: teddy
+      POSTGRES_PASSWORD: teddy
+    ports:
+      - $DOCKER_IP:5432:5432
+
+  #################### Base  ####################
+
+  base: &base
+    build: .
+    env_file: .env
+    links:
+      - teddy_postgres:postgres
+    volumes:
+      - .:/usr/src/app
+      - teddy_gems_2_4_0:/usr/local/bundle
+
+  #################### CONTAINERS ####################
+
+  teddy_app:
+    <<: *base
+    container_name: teddy_app
+    command: /bin/bash bin/server.sh
+    ports:
+      - $DOCKER_IP:9292:9292
+      - $DOCKER_IP:3000:3000
+    environment:
+      - RAILS_ENV=development
+
+  teddy_tests:
+    <<: *base
+    container_name: teddy_tests
+    command: /bin/bash bin/tests.sh
+    environment:
+      - RAILS_ENV=test
+
+volumes:
+  teddy_gems_2_4_0:
