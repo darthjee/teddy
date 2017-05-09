@@ -27,7 +27,6 @@ services:
     container_name: teddy_app
     command: /bin/bash bin/server.sh
     ports:
-      - $DOCKER_IP:9292:9292
       - $DOCKER_IP:3000:3000
     environment:
       - RAILS_ENV=development
