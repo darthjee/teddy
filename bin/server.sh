@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# ensure bundler is present
-gem install bundler
-
 # install dependencies and clean old ones at the same time
 rake bower:install
 
