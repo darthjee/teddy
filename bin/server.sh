@@ -4,7 +4,7 @@
 gem install bundler
 
 # install dependencies and clean old ones at the same time
-bundle install --clean
+rake bower:install
 
 bundle exec rake db:create db:migrate db:seed
 

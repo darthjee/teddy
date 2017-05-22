@@ -17,7 +17,7 @@ services:
     links:
       - teddy_postgres:postgres
     volumes:
-      - .:/usr/src/app
+      - .:/home/app/teddy
       - teddy_gems_2_4_0:/usr/local/bundle
 
   #################### CONTAINERS ####################
