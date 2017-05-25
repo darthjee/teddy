@@ -31,7 +31,7 @@ therefore, Some problems can occour:
  and you can run using
 
  ```shell
- bunpdle exec rails s
+ bundle exec rails s
  ```
 
  and access ```http://localhost:3000```
@@ -45,7 +45,7 @@ therefore, Some problems can occour:
  then run
 
  ```shell
- docker-compose run teddy_app
+ docker-compose up teddy_app
  ```
 
  if you need to enter the console, run
