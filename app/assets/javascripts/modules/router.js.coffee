@@ -33,8 +33,7 @@ class Router
           route = route.replace(regexp, value)
       route + '?ajax=true'
 
-class RouterBuilder
-  constructor: ($routeProvider) ->
+RouterBuilder = ($routeProvider) ->
     new Router($routeProvider).bindRoutes()
 
 app = angular.module('teddy')
