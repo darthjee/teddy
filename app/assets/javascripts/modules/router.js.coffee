@@ -1,44 +1,42 @@
-((_, angular) ->
-  class Router
-    directRoutes: ['/year/:year/month/:month']
-    customRoutes: {}
+class Router
+  directRoutes: ['/year/:year/month/:month']
+  customRoutes: {}
 
-    constructor: ($routeProvider) ->
-      this.provider = $routeProvider
+  constructor: ($routeProvider) ->
+    this.provider = $routeProvider
 
-    bindRoutes: () ->
-      router = this
+  bindRoutes: () ->
+    router = this
 
-      _.each(router.directRoutes, (route) ->
-        router.provider.when(route, {
-          templateUrl: router.buildTemplateFor(route),
-          controller: 'GenericController',
-          controllerAs: 'controller'
-        })
-      )
+    _.each(router.directRoutes, (route) ->
+      router.provider.when(route, {
+        templateUrl: router.buildTemplateFor(route),
+        controller: 'GenericController',
+        controllerAs: 'controller'
+      })
+    )
 
-      _.each(router.customRoutes, (params, route) ->
-        _.extend(params, {
-          templateUrl: router.buildTemplateFor(route)
-        })
+    _.each(router.customRoutes, (params, route) ->
+      _.extend(params, {
+        templateUrl: router.buildTemplateFor(route)
+      })
 
-        router.provider.when(route, params)
-      )
+      router.provider.when(route, params)
+    )
 
-    buildTemplateFor: (route)->
-      (params) ->
-        if params != undefined
-          window.d = params
-          for key, value of params
-            regexp = new RegExp(':' + key + '\\b')
-            route = route.replace(regexp, value)
-        route + '?ajax=true'
+  buildTemplateFor: (route)->
+    (params) ->
+      if params != undefined
+        window.d = params
+        for key, value of params
+          regexp = new RegExp(':' + key + '\\b')
+          route = route.replace(regexp, value)
+      route + '?ajax=true'
 
-  class RouterBuilder
-    constructor: ($routeProvider) ->
-      new Router($routeProvider).bindRoutes()
+class RouterBuilder
+  constructor: ($routeProvider) ->
+    new Router($routeProvider).bindRoutes()
 
-  app = angular.module('teddy')
+app = angular.module('teddy')
 
-  app.config(['$routeProvider', RouterBuilder])
-)(window._, window.angular)
+app.config(['$routeProvider', RouterBuilder])

@@ -1,22 +1,20 @@
-((_, angular)->
-  app = angular.module('global/generic_controller', [])
+app = angular.module('global/generic_controller', [])
 
-  class GenericController
-    
-    constructor: ($location, $http) ->
-      this.path = $location.$$path + '.json'
-      this.http = $http
-      this.request()
+class GenericController
+  
+  constructor: ($location, $http) ->
+    this.path = $location.$$path + '.json'
+    this.http = $http
+    this.request()
 
-    request: () ->
-      promise = this.http.get(this.path)
-      promise.then(this._setData)
+  request: () ->
+    promise = this.http.get(this.path)
+    promise.then(this._setData)
 
-    _setData: (response) =>
-      this.data = response.data
+  _setData: (response) =>
+    this.data = response.data
 
-  app.controller('GenericController', [
-    '$location','$http',
-    GenericController
-  ])
-)(window._, window.angular)
+app.controller('GenericController', [
+  '$location','$http',
+  GenericController
+])
