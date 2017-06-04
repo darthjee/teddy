@@ -1,5 +1,6 @@
 class Router
   defaultConfig: {
+    controller: 'GenericController',
     controllerAs: 'controller'
   }
   directRoutes: [
@@ -14,25 +15,19 @@ class Router
     this.provider = $routeProvider
 
   bindRoutes: () ->
-    router = this
+    _.each(this.directRoutes, this._setRouteConfig)
+    _.each(this.customRoutes, this._setRouteConfig)
 
-    _.each(router.directRoutes, (route) ->
-      router.provider.when(route, {
-        templateUrl: router.buildTemplateFor(route),
-        controller: 'GenericController',
-        controllerAs: 'controller'
-      })
-    )
+  _setRouteConfig: (config, route) =>
+    if (typeof route != 'string')
+      route = config
+      config = {}
 
-    _.each(router.customRoutes, router._setRouteConfig)
+    config = _.extend({}, this.defaultConfig, {
+      templateUrl: this.buildTemplateFor(route)
+    }, config)
 
-  _setRouteConfig: (params, route) =>
-    router = this
-    params = _.extend({}, router.defaultConfig, {
-      templateUrl: router.buildTemplateFor(route)
-    }, params)
-
-    router.provider.when(route, params)
+    this.provider.when(route, config)
 
   buildTemplateFor: (route)->
     (params) ->
