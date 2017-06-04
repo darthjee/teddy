@@ -5,9 +5,7 @@ app = angular.module('calendar/index', [
 class Calendar.IndexController extends Global.GenericController
   constructor: ($location, $http, notifier) ->
     this.notifier = notifier
-    this.path = $location.$$path + '.json'
-    this.http = $http
-    this.request()
+    super($location, $http)
 
   _setData: (response) =>
     super
