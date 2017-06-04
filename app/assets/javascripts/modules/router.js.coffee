@@ -14,7 +14,7 @@ class Router
   constructor: ($routeProvider) ->
     this.provider = $routeProvider
 
-  bindRoutes: () ->
+  _bindRoutes: () ->
     _.each(this.directRoutes, this._setRouteConfig)
     _.each(this.customRoutes, this._setRouteConfig)
 
@@ -24,12 +24,12 @@ class Router
       config = {}
 
     config = _.extend({}, this.defaultConfig, {
-      templateUrl: this.buildTemplateFor(route)
+      templateUrl: this._buildTemplateFor(route)
     }, config)
 
     this.provider.when(route, config)
 
-  buildTemplateFor: (route)->
+  _buildTemplateFor: (route)->
     (params) ->
       if params != undefined
         window.d = params
@@ -39,7 +39,7 @@ class Router
       route + '?ajax=true'
 
 RouterBuilder = ($routeProvider) ->
-    new Router($routeProvider).bindRoutes()
+    new Router($routeProvider)._bindRoutes()
 
 app = angular.module('teddy')
 
