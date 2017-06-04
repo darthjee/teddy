@@ -1,5 +1,5 @@
 module = angular.module('teddy', [
-  'ngRoute', 'global'
+  'ngRoute', 'global', 'calendar'
 ])
 
 module.config(['$httpProvider', ($httpProvider) ->

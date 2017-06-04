@@ -3,10 +3,21 @@ app = angular.module('calendar/index', [
 ])
 
 class CalendarIndexController
-  constructor: (notifier) ->
+  constructor: ($location, $http, notifier) ->
     this.notifier = notifier
+    this.path = $location.$$path + '.json'
+    this.http = $http
+    this.request()
+
+  request: () ->
+    promise = this.http.get(this.path)
+    promise.then(this._setData)
+
+  _setData: (response) =>
+    this.data = response.data
 
 app.controller('CalendarIndexController', [
-  'notifier', CalendarIndexController
+  '$location','$http','notifier',
+  CalendarIndexController
 ])
 

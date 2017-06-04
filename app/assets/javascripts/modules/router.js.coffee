@@ -1,6 +1,11 @@
 class Router
-  directRoutes: ['/year/:year/month/:month']
-  customRoutes: {}
+  directRoutes: []
+  customRoutes: {
+    '/year/:year/month/:month': {
+      controller: 'CalendarIndexController',
+      controllerAs: 'controller'
+    }
+  }
 
   constructor: ($routeProvider) ->
     this.provider = $routeProvider
