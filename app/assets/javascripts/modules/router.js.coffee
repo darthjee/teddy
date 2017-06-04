@@ -1,13 +1,13 @@
-class Router
+class window.Router
   defaultConfig: {
-    controller: 'GenericController',
+    controller: 'Global.GenericController',
     controllerAs: 'controller'
   }
   directRoutes: [
   ]
   customRoutes: {
     '/year/:year/month/:month': {
-      controller: 'CalendarIndexController'
+      controller: 'Calendar.IndexController'
     }
   }
 
@@ -38,9 +38,9 @@ class Router
           route = route.replace(regexp, value)
       route + '?ajax=true'
 
-RouterBuilder = ($routeProvider) ->
+Router.Builder = ($routeProvider) ->
     new Router($routeProvider)._bindRoutes()
 
 app = angular.module('teddy')
 
-app.config(['$routeProvider', RouterBuilder])
+app.config(['$routeProvider', Router.Builder])

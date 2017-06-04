@@ -1,6 +1,6 @@
 app = angular.module('global/generic_controller', [])
 
-class window.GenericController
+class Global.GenericController
 
   constructor: ($location, $http) ->
     this.path = $location.$$path + '.json'
@@ -14,7 +14,7 @@ class window.GenericController
   _setData: (response) =>
     this.data = response.data
 
-app.controller('GenericController', [
+app.controller('Global.GenericController', [
   '$location','$http',
-  GenericController
+  Global.GenericController
 ])

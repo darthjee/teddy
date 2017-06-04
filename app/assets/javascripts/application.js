@@ -19,5 +19,7 @@
 //= require md5
 //= require bootstrap
 //= require modules/teddy
+//= require modules/global
+//= require modules/calendar
 //= require controllers/global/generic_controller
 //= require_tree .

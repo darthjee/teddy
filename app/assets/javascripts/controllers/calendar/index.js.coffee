@@ -2,7 +2,7 @@ app = angular.module('calendar/index', [
   'global/notifier'
 ])
 
-class CalendarIndexController extends GenericController
+class Calendar.IndexController extends Global.GenericController
   constructor: ($location, $http, notifier) ->
     this.notifier = notifier
     this.path = $location.$$path + '.json'
@@ -12,8 +12,8 @@ class CalendarIndexController extends GenericController
   _setData: (response) =>
     super
 
-app.controller('CalendarIndexController', [
+app.controller('Calendar.IndexController', [
   '$location','$http','notifier',
-  CalendarIndexController
+  Calendar.IndexController
 ])
 

@@ -1,12 +1,11 @@
 module = angular.module('global/notifier', [])
 
-NotifierServiceFactory = () ->
+Global.NotifierServiceFactory = () ->
   new NotifierService()
 
 class NotifierService
   constructor: ->
     this.watchs = {}
-
 
   notify: (key, value) ->
     _.each(this.listeners(key), (callback) ->
@@ -21,4 +20,4 @@ class NotifierService
       this.watchs[key] = []
     this.watchs[key]
 
-module.service('notifier', [NotifierServiceFactory])
+module.service('notifier', [Global.NotifierServiceFactory])

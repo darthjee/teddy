@@ -14,7 +14,7 @@
 
     <%= render 'layouts/header' %>
 
-    <div class="container-fluid" ng-view ng-controller="GlobalController as gloc" ng-class="{ debug: gloc.admin }">
+    <div class="container-fluid" ng-view ng-controller="Global.Controller as gloc" ng-class="{ debug: gloc.admin }">
       <%= yield %>
     </div>
 
