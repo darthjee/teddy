@@ -6,8 +6,7 @@ class Router
   ]
   customRoutes: {
     '/year/:year/month/:month': {
-      controller: 'CalendarIndexController',
-      controllerAs: 'controller'
+      controller: 'CalendarIndexController'
     }
   }
 
@@ -29,9 +28,9 @@ class Router
 
   _setRouteConfig: (params, route) =>
     router = this
-    _.extend(params, {
+    params = _.extend({}, router.defaultConfig, {
       templateUrl: router.buildTemplateFor(route)
-    })
+    }, params)
 
     router.provider.when(route, params)
 
