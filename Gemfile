@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.4.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.2'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -25,12 +25,12 @@ gem 'spring',        group: :development
 gem 'newrelic_rpm'
 
 gem 'concern_builder'
-gem 'bidu-active_ext'
+gem 'bidu-active_ext', '~> 1.1.0'
+gem 'bidu-core_ext', '~> 1.2.4'
 gem 'rqrcode_png'
 gem 'tarquinn', '0.1.0'
 gem 'mini_magick'
 gem 'recursive-open-struct'
-gem 'mandrill-api'
 
 group :development, :test do
   gem 'factory_girl'
