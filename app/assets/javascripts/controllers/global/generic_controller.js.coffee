@@ -1,20 +1,20 @@
-app = angular.module('global/generic_controller', [])
+app = angular.module('global/generic_controller', [
+  'global/generic_requester', 'global/notifier'
+])
 
 class Global.GenericController
-
-  constructor: ($location, $http) ->
-    this.path = $location.$$path + '.json'
-    this.http = $http
+  constructor: (requester) ->
+    this.requester = requester
     this.request()
 
   request: () ->
-    promise = this.http.get(this.path)
+    promise = this.requester.request()
     promise.then(this._setData)
 
   _setData: (response) =>
     this.data = response.data
 
 app.controller('Global.GenericController', [
-  '$location','$http',
+  'generic_requester', 'notifier'
   Global.GenericController
 ])

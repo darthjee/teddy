@@ -7,10 +7,14 @@ class Bill < ApplicationRecord
   scope :ends_after, -> (date) { where('end_date >= ? or end_date is null', date)}
   scope :for_month, -> (date) { starts_before(date.end_of_month).ends_after(date.beginning_of_month) }
 
-validates_presence_of :day, :user
+  validates_presence_of :day, :user
 
-  def build_payment(month_date)
-    due_date = (month_date - 1.month) + day.days
-    payments.create(due_date: due_date)
+  def build_payment(month_date = Date.today)
+    due_date = (month_date.beginning_of_month - 1.day) + day.days
+    payments.build(due_date: due_date)
+  end
+
+  def create_payment(month_date = Date.today)
+    build_payment(month_date).save
   end
 end

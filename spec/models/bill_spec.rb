@@ -107,7 +107,7 @@ describe Bill do
     it { expect(subject).to validate_presence_of(:user) }
   end
 
-  describe '#build_payment' do
+  describe '#create_payment' do
     before do
       Timecop.freeze(2017,03,10)
     end
@@ -116,8 +116,43 @@ describe Bill do
 
     it do
       expect do
-        subject.build_payment(month_date)
+        subject.create_payment(month_date)
       end.to change(Payment, :count)
+    end
+  end
+
+  describe '#build_payment' do
+    before do
+      Timecop.freeze(2017,03,10)
+    end
+    let(:subject) { bills(:active) }
+    let(:month_date) { Date.today }
+    let(:beginning_of_month) { month_date.beginning_of_month }
+    let(:end_of_month) { month_date.end_of_month }
+    let(:built_payment) { subject.build_payment(month_date + 1.month) }
+
+    it do
+      expect do
+        subject.build_payment(month_date)
+      end.not_to change(Payment, :count)
+    end
+
+    it 'builds for the same day' do
+      expect(built_payment.due_date.day).to eq(subject.day)
+    end
+
+    it 'does not create for current date' do
+      expect(built_payment.due_date).not_to be_between(beginning_of_month, end_of_month)
+    end
+
+    it 'creates for month given date' do
+      expect(built_payment.due_date).to be_between(beginning_of_month + 1.month, end_of_month + 1.month)
+    end
+
+    context 'when date is not supplied' do
+      it 'creates for the current month' do
+        expect(subject.build_payment.due_date).to be_between(beginning_of_month, end_of_month)
+      end
     end
   end
 end
