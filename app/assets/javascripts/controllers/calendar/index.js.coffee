@@ -39,7 +39,6 @@ class Calendar.IndexController extends Global.GenericController
       }
     )
 
-
 app.controller('Calendar.IndexController', [
   'generic_requester','notifier',
   Calendar.IndexController
