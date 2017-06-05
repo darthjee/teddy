@@ -8,7 +8,12 @@ class Calendar.IndexController extends Global.GenericController
     super($location, $http)
 
   _setData: (response) =>
-    super
+    this.firstDate = new Date(response.data.firstDate)
+    this.lastDate = new Date(response.data.lastDate)
+    this._buildCalendar()
+
+  _buildCalendar: ->
+    1
 
 app.controller('Calendar.IndexController', [
   '$location','$http','notifier',
