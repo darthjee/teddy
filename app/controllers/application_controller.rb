@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     action = params[:action]
     respond_to do |format|
       format.json do
-        render json: send("#{action}_json").change_keys(&:to_s).lower_camelize_keys
+        render json: send("#{action}_json").lower_camelize_keys
       end
       format.html { render action }
     end
