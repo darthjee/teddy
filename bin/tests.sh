@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-apt-get install nodejs
 
 # make sure Postgres is available
 until nc -z postgres 5432; do echo Waiting for Posgres; sleep 1; done
