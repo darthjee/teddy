@@ -14,8 +14,8 @@ class CalendarController < ApplicationController
 
   def index_json
     {
-      start: beginning_of_month,
-      end: end_of_month
+      first_date: beginning_of_month,
+      last_date: end_of_month
     }
   end
 

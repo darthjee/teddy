@@ -12,31 +12,21 @@ development: &development
   encoding: utf8
   database: teddy_development
   pool: 5
-  username: postgres
-  password: postgres
-  host: localhost
+  username: <%= ENV["TEDDY_POSTGRES_USER"] %>
+  password: <%= ENV["TEDDY_POSTGRES_PASSWORD"] %>
+  host: <%= ENV["TEDDY_POSTGRES_HOST"] %>
 <% if socket %>
   socket: <%= socket %>
 <% else %>
-  port: <%= port %>
+  port: <%= ENV["TEDDY_POSTGRES_PORT"] %>
 <% end %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test: &test
-  adapter: postgresql
-  encoding: utf8
+  <<: *development
   database: teddy_test
-  pool: 5
-  username: postgres
-  password: postgres
-  host: localhost
-<% if socket %>
-  socket: <%= socket %>
-<% else %>
-  port: <%= port %>
-<% end %>
 
 test_readonly:
   <<: *test
