@@ -38,6 +38,12 @@ services:
     environment:
       - RAILS_ENV=test
 
+  teddy_root:
+    <<: *base
+    user: root
+    container_name: teddy_root
+    command: /bin/bash
+
 networks:
   default:
     external:
