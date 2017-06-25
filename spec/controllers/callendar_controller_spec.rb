@@ -23,8 +23,8 @@ describe CalendarController do
 
         get :index, params: parameters
 
-        expect(payments_json.map { |p| p.slice(:due_date, :bill_id, :paid) }).to eq([
-          { due_date:1489104000000, bill_id: 1, paid: nil }
+        expect(payments_json).to match([
+          hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
         ])
       end
     end
