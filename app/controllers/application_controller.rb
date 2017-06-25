@@ -12,15 +12,17 @@ class ApplicationController < ActionController::Base
   end
 
   def export_json(hash)
-    hash.change_values do |v|
+    hash.change_values(skip_inner: false) do |v|
       case v
       when Date
         v.to_time.to_i * 1000
       when Time
         v.to_i * 1000
+      when ApplicationRecord
+        export_json(v.as_json)
       else
         v
       end
-    end.lower_camelize_keys
+    end.lower_camelize_keys!
   end
 end

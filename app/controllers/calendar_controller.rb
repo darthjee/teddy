@@ -15,8 +15,13 @@ class CalendarController < ApplicationController
   def index_json
     {
       first_date: beginning_of_month,
-      last_date: end_of_month
+      last_date: end_of_month,
+      payments: payments
     }
+  end
+
+  def payments
+    @payments ||= Payment.period(month_date)
   end
 
   def month_date
