@@ -1,6 +1,10 @@
 # Teddy
 A bill schedule management
 
+[![Code Climate](https://codeclimate.com/github/darthjee/teddy/badges/gpa.svg)](https://codeclimate.com/github/darthjee/teddy)
+[![Test Coverage](https://codeclimate.com/github/darthjee/teddy/badges/coverage.svg)](https://codeclimate.com/github/darthjee/teddy/coverage)
+[![Issue Count](https://codeclimate.com/github/darthjee/teddy/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/teddy)
+
 ## Motivation
 
 Bills needs to be paid before a due date, and sometimes they are handed by more than one person,
