@@ -17,15 +17,17 @@ describe CalendarController do
         )
       end
 
-      it 'returns the payments for this month' do
-        month_date = Date.new(2017, 3, 1)
-        Bill.active.for_month(month_date).each { |b| b.create_payment(month_date) }
+      context 'user is logged in' do
+        it 'returns the payments for this month' do
+          month_date = Date.new(2017, 3, 1)
+          Bill.active.for_month(month_date).each { |b| b.create_payment(month_date) }
 
-        get :index, params: parameters
+          get :index, params: parameters
 
-        expect(payments_json).to match([
-          hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
-        ])
+          expect(payments_json).to match([
+            hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
+          ])
+        end
       end
     end
   end

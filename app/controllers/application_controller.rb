@@ -25,4 +25,8 @@ class ApplicationController < ActionController::Base
       end
     end.lower_camelize_keys!
   end
+
+  def logged_user
+    User.first
+  end
 end
