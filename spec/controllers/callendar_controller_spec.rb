@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe CalendarController do
   describe 'GET index' do
-    let(:parameters) { { year: 2017, month: 3, format: :json } }
+    let(:month) { 3 }
+    let(:year) { 2017 }
+    let(:parameters) { { year: year, month: month, format: :json } }
     let(:response_json) { JSON.parse(response.body).underscore_keys.deep_symbolize_keys }
 
     context 'when requesting for a month that has bills' do
@@ -26,6 +28,28 @@ describe CalendarController do
           expect(payments_json).to match([
             hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
           ])
+        end
+
+        context 'when there is a payment for the previews month' do
+          let(:previews_month) { Date.new(year, month - 1, 1) }
+          before do
+            Bill.all.each { |b| b.create_payment(previews_month) }
+          end
+
+          it 'returns the payments for this month' do
+            get :index, params: parameters
+
+            expect(payments_json).to include(
+              hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
+            )
+          end
+
+          it do
+            get :index, params: parameters
+            expect(payments_json).not_to include(
+              hash_including(due_date: 1486684800000, bill_id: 1, paid: nil)
+            )
+          end
         end
       end
 
