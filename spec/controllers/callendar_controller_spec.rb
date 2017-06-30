@@ -18,6 +18,8 @@ describe CalendarController do
       end
 
       context 'user is logged in' do
+        include_context 'user is logged in'
+
         it 'returns the payments for this month' do
           month_date = Date.new(2017, 3, 1)
           Bill.active.for_month(month_date).each { |b| b.create_payment(month_date) }
@@ -27,6 +29,20 @@ describe CalendarController do
           expect(payments_json).to match([
             hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
           ])
+        end
+      end
+
+      context 'user without payment is logged in' do
+        include_context 'user is logged in'
+        let(:logged_user) { create :user }
+
+        it 'returns an empty payment list' do
+          month_date = Date.new(2017, 3, 1)
+          Bill.active.for_month(month_date).each { |b| b.create_payment(month_date) }
+
+          get :index, params: parameters
+
+          expect(payments_json).to be_empty
         end
       end
     end

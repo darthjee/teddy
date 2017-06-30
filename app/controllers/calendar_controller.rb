@@ -21,7 +21,11 @@ class CalendarController < ApplicationController
   end
 
   def payments
-    @payments ||= Payment.period(month_date)
+    @payments ||= Payment.period(month_date).where(bill_id: bills.pluck(:id))
+  end
+
+  def bills
+    @bills ||= logged_user.bills
   end
 
   def month_date
