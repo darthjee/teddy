@@ -77,6 +77,12 @@ describe CalendarController do
               hash_including(due_date: 1486684800000, bill_id: 1, paid: nil)
             )
           end
+
+          it 'should create new payments' do
+            expect do
+              get :index, params: parameters
+            end.to change(Payment, :count).by(1)
+          end
         end
       end
 
