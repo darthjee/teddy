@@ -3,6 +3,7 @@ class CalendarController < ApplicationController
   include Common::Redirection
 
   delegate :beginning_of_month, :end_of_month, to: :month_date
+  before_action :build_payments, only: :index
 
   DAYS_PER_WEEK=7
 
@@ -18,6 +19,10 @@ class CalendarController < ApplicationController
       last_date: end_of_month,
       payments: payments
     }
+  end
+
+  def build_payments
+    bills.each { |b| b.create_payment(month_date) }
   end
 
   def payments

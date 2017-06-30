@@ -21,9 +21,6 @@ describe CalendarController do
         include_context 'user is logged in'
 
         it 'returns the payments for this month' do
-          month_date = Date.new(2017, 3, 1)
-          Bill.active.for_month(month_date).each { |b| b.create_payment(month_date) }
-
           get :index, params: parameters
 
           expect(payments_json).to match([
@@ -37,9 +34,6 @@ describe CalendarController do
         let(:logged_user) { create :user }
 
         it 'returns an empty payment list' do
-          month_date = Date.new(2017, 3, 1)
-          Bill.active.for_month(month_date).each { |b| b.create_payment(month_date) }
-
           get :index, params: parameters
 
           expect(payments_json).to be_empty
