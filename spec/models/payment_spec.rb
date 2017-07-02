@@ -9,13 +9,15 @@ describe Payment do
   end
 
   describe 'scopes' do
+    let(:month) { 3 }
+    let(:current_month) { Date.today.month }
     let(:bill) { bills(:active) }
     let(:payments) { bill.payments }
 
     describe 'period' do
       let(:target_date) { Date.today + 1.day }
       before do
-        Timecop.freeze(2016,03,10) do
+        Timecop.freeze(2016, month, 10) do
           bill.create_payment
         end
         bill.create_payment(target_date)
@@ -26,12 +28,16 @@ describe Payment do
           expect(payments.period(target_date)).not_to be_empty
         end
 
-        it do
-          expect(payments.period(target_date).count).to eq(1)
-        end
-      end
+        context 'and there is a payment for the next month' do
+          let(:ahead_of_time_payment) { payment }
+          let!(:future_payment) do
+            bill.create_payment(target_date + 1.month)
+          end
 
-      context 'when not passing the month' do
+          it do
+            expect(payments.period(target_date)).not_to include(future_payment)
+          end
+        end
       end
     end
   end
