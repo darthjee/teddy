@@ -119,6 +119,10 @@ describe Bill do
         subject.create_payment(month_date)
       end.to change(Payment, :count)
     end
+
+    it do
+      expect(subject.create_payment(month_date)).to be_a(Payment)
+    end
   end
 
   describe '#build_payment' do
@@ -135,6 +139,10 @@ describe Bill do
       expect do
         subject.build_payment(month_date)
       end.not_to change(Payment, :count)
+    end
+
+    it do
+      expect(subject.build_payment(month_date)).to be_a(Payment)
     end
 
     it 'builds for the same day' do

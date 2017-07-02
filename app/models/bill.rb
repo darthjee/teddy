@@ -15,6 +15,6 @@ class Bill < ApplicationRecord
   end
 
   def create_payment(month_date = Date.today)
-    build_payment(month_date).save
+    build_payment(month_date).tap(&:save)
   end
 end
