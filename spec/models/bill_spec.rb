@@ -2,7 +2,64 @@ require 'spec_helper'
 
 describe Bill do
   describe 'scopes' do
-    describe 'active' do
+    describe '.without_payment_for_month' do
+      let(:month_date) { Date.new(2017, 03, 01) }
+      let(:bill_day) { 10 }
+      let(:bill) { create(:bill, day: bill_day) }
+      let(:bills) { described_class.without_paymen_for_month(month_date) }
+
+      context 'when there are no payments for the bill' do
+        it 'returns the bill' do
+          expect(bills).to include(bill)
+        end
+      end
+
+      context 'when there is a payment for the bill' do
+        before do
+          bill.create_payment(payment_date)
+        end
+
+        context 'and the date is before the month' do
+          let(:payment_date) { month_date - 1.month }
+          it 'returns the bill' do
+            expect(bills).to include(bill)
+          end
+        end
+
+        context 'and the date is after the month' do
+          let(:payment_date) { month_date + 1.month }
+          it 'returns the bill' do
+            expect(bills).to include(bill)
+          end
+        end
+
+        context 'and the date is within the month' do
+          let(:payment_date) { month_date }
+
+          it 'does not return the bill' do
+            expect(bills).not_to include(bill)
+          end
+
+          context 'and the bill is for the beggining of month' do
+            let(:day) { month_date.beginning_of_month.day }
+
+            it 'does not return the bill' do
+              expect(bills).not_to include(bill)
+            end
+          end
+
+          context 'and the bill is for the end of month' do
+            let(:day) { month_date.end_of_month.day }
+
+            it 'does not return the bill' do
+              expect(bills).not_to include(bill)
+            end
+          end
+        end
+      end
+    end
+
+    describe '.active' do
       it 'scope exist' do
         expect(described_class.active.count).not_to be(described_class.count)
       end
