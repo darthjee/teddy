@@ -9,9 +9,7 @@ describe Bill do
       let(:bills) { described_class.without_paymen_for_month(month_date) }
 
       context 'when there are no payments for the bill' do
-        it 'returns the bill' do
-          expect(bills).to include(bill)
-        end
+        it_behaves_like 'without_payment_for_month returns the bill'
       end
 
       context 'when there is a payment for the bill' do
@@ -21,39 +19,27 @@ describe Bill do
 
         context 'and the date is before the month' do
           let(:payment_date) { month_date - 1.month }
-          it 'returns the bill' do
-            expect(bills).to include(bill)
-          end
+          it_behaves_like 'without_payment_for_month returns the bill'
         end
 
         context 'and the date is after the month' do
           let(:payment_date) { month_date + 1.month }
-          it 'returns the bill' do
-            expect(bills).to include(bill)
-          end
+          it_behaves_like 'without_payment_for_month returns the bill'
         end
 
         context 'and the date is within the month' do
           let(:payment_date) { month_date }
 
-          it 'does not return the bill' do
-            expect(bills).not_to include(bill)
-          end
+          it_behaves_like 'without_payment_for_month does not return the bill'
 
           context 'and the bill is for the beggining of month' do
             let(:day) { month_date.beginning_of_month.day }
-
-            it 'does not return the bill' do
-              expect(bills).not_to include(bill)
-            end
+            it_behaves_like 'without_payment_for_month does not return the bill'
           end
 
           context 'and the bill is for the end of month' do
             let(:day) { month_date.end_of_month.day }
-
-            it 'does not return the bill' do
-              expect(bills).not_to include(bill)
-            end
+            it_behaves_like 'without_payment_for_month does not return the bill'
           end
         end
       end

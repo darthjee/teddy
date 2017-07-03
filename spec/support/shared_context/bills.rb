@@ -25,3 +25,15 @@ shared_examples 'a method that builds a payment for a given dare' do |method|
     end
   end
 end
+
+shared_examples 'without_payment_for_month does not return the bill' do
+  it 'does not return the bill' do
+    expect(bills).not_to include(bill)
+  end
+end
+
+shared_examples 'without_payment_for_month returns the bill' do
+  it 'returns the bill' do
+    expect(bills).to include(bill)
+  end
+end
