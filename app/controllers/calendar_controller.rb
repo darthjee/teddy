@@ -22,8 +22,11 @@ class CalendarController < ApplicationController
   end
 
   def build_payments
-    # TODO scope bills without 
-    bills.each { |b| b.create_payment(month_date) unless b.payments.period(month_date).any? }
+    bills_without_payment.each { |b| b.create_payment(month_date) }
+  end
+
+  def bills_without_payment
+    bills.without_payment_for_month(month_date)
   end
 
   def payments

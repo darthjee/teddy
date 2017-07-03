@@ -6,7 +6,7 @@ describe Bill do
       let(:month_date) { Date.new(2017, 03, 01) }
       let(:bill_day) { 10 }
       let(:bill) { create(:bill, day: bill_day) }
-      let(:bills) { described_class.without_paymen_for_month(month_date) }
+      let(:bills) { described_class.without_payment_for_month(month_date) }
 
       context 'when there are no payments for the bill' do
         it_behaves_like 'without_payment_for_month returns the bill'
