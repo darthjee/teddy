@@ -62,6 +62,19 @@ describe CalendarController do
             )
           end
         end
+
+        context 'when the bill is not active' do
+          let(:bill) { bills(:inactive) }
+
+          it 'does not return payment for the bill' do
+            get :index, params: parameters
+
+            expect(payments_json).not_to match([
+              hash_including(due_date:1489104000000, bill_id: bill_id, paid: nil)
+            ])
+          end
+
+        end
       end
 
       context 'user without payment is logged in' do
