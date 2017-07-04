@@ -8,6 +8,8 @@ describe CalendarController do
     let(:response_json) { JSON.parse(response.body).underscore_keys.deep_symbolize_keys }
     let(:previews_month) { Date.new(year, month - 1, 1) }
     let(:current_month) { Date.new(year, month, 1) }
+    let(:bill) { bills(:active) }
+    let(:bill_id) { bill.id }
 
     context 'when requesting for a month that has bills' do
       let(:payments_json) { response_json[:payments] }
@@ -35,7 +37,7 @@ describe CalendarController do
             get :index, params: parameters
 
             expect(payments_json).to match([
-              hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
+              hash_including(due_date:1489104000000, bill_id: bill_id, paid: nil)
             ])
           end
 
@@ -56,7 +58,7 @@ describe CalendarController do
           it 'does not return the payment for previows month' do
             get :index, params: parameters
             expect(payments_json).not_to include(
-              hash_including(due_date: 1486684800000, bill_id: 1, paid: nil)
+              hash_including(due_date: 1486684800000, bill_id: bill_id, paid: nil)
             )
           end
         end

@@ -3,7 +3,7 @@ shared_examples 'a route that returns all the payments for that month' do
     get :index, params: parameters
 
     expect(payments_json).to match([
-      hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
+      hash_including(due_date:1489104000000, bill_id: bill_id, paid: nil)
     ])
   end
 end
