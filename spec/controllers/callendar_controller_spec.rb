@@ -1,5 +1,25 @@
 require 'spec_helper'
 
+shared_examples 'a route that returns all the payments for that month' do
+  it 'returns the payments for this month' do
+    get :index, params: parameters
+
+    expect(payments_json).to match([
+      hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
+    ])
+  end
+end
+
+shared_examples 'a route that creates and returns all the payments for that month' do
+  it_behaves_like 'a route that returns all the payments for that month'
+
+  it 'should create new payments' do
+    expect do
+      get :index, params: parameters
+    end.to change(Payment, :count).by(1)
+  end
+end
+
 describe CalendarController do
   describe 'GET index' do
     let(:month) { 3 }
@@ -24,19 +44,7 @@ describe CalendarController do
       context 'user is logged in' do
         include_context 'user is logged in'
 
-        it 'returns the payments for this month' do
-          get :index, params: parameters
-
-          expect(payments_json).to match([
-            hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
-          ])
-        end
-
-        it 'should create new payments' do
-          expect do
-            get :index, params: parameters
-          end.to change(Payment, :count).by(1)
-        end
+        it_behaves_like 'a route that creates and returns all the payments for that month'
 
         context 'when there is already payment for this month' do
           before do
@@ -63,25 +71,13 @@ describe CalendarController do
             Bill.all.each { |b| b.create_payment(previews_month) }
           end
 
-          it 'returns the payments for this month' do
-            get :index, params: parameters
-
-            expect(payments_json).to include(
-              hash_including(due_date:1489104000000, bill_id: 1, paid: nil)
-            )
-          end
+          it_behaves_like 'a route that creates and returns all the payments for that month'
 
           it 'does not return the payment for previows month' do
             get :index, params: parameters
             expect(payments_json).not_to include(
               hash_including(due_date: 1486684800000, bill_id: 1, paid: nil)
             )
-          end
-
-          it 'should create new payments' do
-            expect do
-              get :index, params: parameters
-            end.to change(Payment, :count).by(1)
           end
         end
       end
