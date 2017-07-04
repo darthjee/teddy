@@ -2,6 +2,10 @@ first:
   user_id: 1
   bill_id: 1
 
+expired:
+  user_id: 1
+  bill_id: 2
+
 inactive:
   user_id: 1
   bill_id: 4

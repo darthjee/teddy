@@ -34,7 +34,7 @@ class CalendarController < ApplicationController
   end
 
   def bills
-    @bills ||= logged_user.bills.active
+    @bills ||= logged_user.bills.active.for_month(month_date)
   end
 
   def month_date

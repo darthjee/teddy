@@ -36,9 +36,9 @@ describe CalendarController do
           it 'returns the payments for this month' do
             get :index, params: parameters
 
-            expect(payments_json).to match([
+            expect(payments_json).to include(
               hash_including(due_date:1489104000000, bill_id: bill_id, paid: nil)
-            ])
+            )
           end
 
           it 'should not create new payments' do
@@ -70,10 +70,21 @@ describe CalendarController do
             get :index, params: parameters
 
             expect(payments_json).not_to match([
-              hash_including(due_date:1489104000000, bill_id: bill_id, paid: nil)
+              hash_including(bill_id: bill_id)
             ])
           end
+        end
 
+        context 'when the bill is expired' do
+          let(:bill) { bills(:expired) }
+
+          it 'does not return payment for the bill' do
+            get :index, params: parameters
+
+            expect(payments_json).not_to match([
+              hash_including(bill_id: bill_id)
+            ])
+          end
         end
       end
 
