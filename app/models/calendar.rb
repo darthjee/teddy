@@ -1,4 +1,6 @@
 class Calendar
+  include ActiveModel::Serialization
+
   attr_reader :year, :month, :user
 
   def initialize(year, month, user)
@@ -19,11 +21,19 @@ class Calendar
     month_date.days_between(Date.today) < 365
   end
 
-  def month_date
-    @month_date ||= Date.new(year, month, 1)
+  def first_date
+    month_date.beginning_of_month
+  end
+
+  def last_date
+    month_date.end_of_month
   end
 
   private
+
+  def month_date
+    @month_date ||= Date.new(year, month, 1)
+  end
 
   def bills_without_payment
     bills.without_payment_for_month(month_date)
