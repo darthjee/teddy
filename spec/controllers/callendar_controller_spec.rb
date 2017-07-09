@@ -67,7 +67,7 @@ describe CalendarController do
           end
 
           context 'when requesting a date very behind of time' do
-            let(:bill) { bills(:not_started) }
+            let(:bill) { bills(:expired) }
             let(:parameters) { { year: year - 2, month: month, format: :json } }
             let(:expected_payment) { { due_date: 1426032000000, bill_id: bill_id, paid: nil } }
 
