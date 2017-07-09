@@ -16,7 +16,7 @@ describe Serializers::Payment do
       }
     end
 
-    it do
+    it 'returns the serialized payment' do
       expect(subject.as_json).to match(
         hash_including(expected)
       )
