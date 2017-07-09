@@ -13,6 +13,10 @@ class CalendarController < ApplicationController
 
   private
 
+  def distant_date?
+    month_date.days_between(Date.today) < 365
+  end
+
   def index_json
     {
       first_date: beginning_of_month,
@@ -22,7 +26,7 @@ class CalendarController < ApplicationController
   end
 
   def build_payments
-    return unless Date.today - month_date < 1.year
+    return unless distant_date?
     bills_without_payment.each { |b| b.create_payment(month_date) }
   end
 
@@ -31,7 +35,19 @@ class CalendarController < ApplicationController
   end
 
   def payments
-    @payments ||= Payment.period(month_date).where(bill_id: bills.pluck(:id))
+    @payments ||= fetch_payments
+  end
+
+  def fetch_payments
+    created_payments + built_payments
+  end
+
+  def built_payments
+    bills_without_payment.map { |b| b.build_payment(month_date) }
+  end
+
+  def created_payments
+    Payment.period(month_date).where(bill_id: bills.pluck(:id))
   end
 
   def bills

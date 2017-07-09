@@ -65,6 +65,20 @@ describe CalendarController do
               end.not_to change(Payment, :count)
             end
           end
+
+          context 'when requesting a date very behind of time' do
+            let(:bill) { bills(:not_started) }
+            let(:parameters) { { year: year - 2, month: month, format: :json } }
+            let(:expected_payment) { { due_date: 1426032000000, bill_id: bill_id, paid: nil } }
+
+            it_behaves_like 'a route that returns all the payments for that month'
+
+            it 'should not create new payments' do
+              expect do
+                get :index, params: parameters
+              end.not_to change(Payment, :count)
+            end
+          end
         end
 
         context 'when there is a payment for the previews month' do
