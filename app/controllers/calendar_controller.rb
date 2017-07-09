@@ -22,6 +22,7 @@ class CalendarController < ApplicationController
   end
 
   def build_payments
+    return unless Date.today - month_date < 1.year
     bills_without_payment.each { |b| b.create_payment(month_date) }
   end
 

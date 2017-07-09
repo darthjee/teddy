@@ -11,6 +11,10 @@ describe CalendarController do
     let(:bill) { bills(:active) }
     let(:bill_id) { bill.id }
 
+    before do
+      Timecop.freeze(year, month, 10, 12, 0, 0)
+    end
+
     context 'when requesting for a month that has bills' do
       let(:payments_json) { response_json[:payments] }
 
@@ -25,6 +29,7 @@ describe CalendarController do
 
       context 'user is logged in' do
         include_context 'user is logged in'
+        let(:expected_payment) { { due_date:1489104000000, bill_id: bill_id, paid: nil } }
 
         it_behaves_like 'a route that creates and returns all the payments for that month'
 
@@ -45,6 +50,20 @@ describe CalendarController do
             expect do
               get :index, params: parameters
             end.not_to change(Payment, :count)
+          end
+
+          context 'when requesting a date very ahead of time' do
+            let(:bill) { bills(:not_started) }
+            let(:parameters) { { year: year + 2, month: month, format: :json } }
+            let(:expected_payment) { { due_date:1552348800000, bill_id: bill_id, paid: nil } }
+
+            it_behaves_like 'a route that returns all the payments for that month'
+
+            it 'should not create new payments' do
+              expect do
+                get :index, params: parameters
+              end.not_to change(Payment, :count)
+            end
           end
         end
 
