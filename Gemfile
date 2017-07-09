@@ -31,6 +31,7 @@ gem 'rqrcode_png'
 gem 'tarquinn', '0.1.0'
 gem 'mini_magick'
 gem 'recursive-open-struct'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'factory_girl'
