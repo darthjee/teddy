@@ -18,8 +18,6 @@ class ApplicationController < ActionController::Base
         v.to_time.to_i * 1000
       when Time
         v.to_i * 1000
-      when ApplicationRecord, ActiveModel::Serializer
-        export_json(v.as_json)
       else
         v
       end
