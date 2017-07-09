@@ -14,7 +14,7 @@ class CalendarController < ApplicationController
   private
 
   def index_json
-    Serializers::Calendar.new(calendar).as_json
+    Serializers::Calendar.new(calendar)
   end
 
   def build_payments

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     action = params[:action]
     respond_to do |format|
       format.json do
-        render json: export_json(send("#{action}_json"))
+        render json: export_json(send("#{action}_json").as_json)
       end
       format.html { render action }
     end
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         v.to_time.to_i * 1000
       when Time
         v.to_i * 1000
-      when ApplicationRecord
+      when ApplicationRecord, ActiveModel::Serializer
         export_json(v.as_json)
       else
         v
