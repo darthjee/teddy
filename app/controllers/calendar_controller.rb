@@ -2,7 +2,7 @@ class CalendarController < ApplicationController
   include Common::User
   include Common::Redirection
 
-  delegate :distant_date?, :payments, :first_date, :last_date, to: :calendar
+  delegate :distant_date?, to: :calendar
   before_action :build_payments, only: :index
 
   DAYS_PER_WEEK=7
@@ -14,11 +14,7 @@ class CalendarController < ApplicationController
   private
 
   def index_json
-    {
-      first_date: first_date,
-      last_date: last_date,
-      payments: payments
-    }
+    Serializers::Calendar.new(calendar).as_json
   end
 
   def build_payments
