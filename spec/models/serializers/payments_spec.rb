@@ -11,8 +11,9 @@ describe Serializers::Payment do
         bill_id: bill.id,
         due_date: instance_of(Date),
         id: nil,
-        paid: nil
-      }.stringify_keys
+        paid: nil,
+        day: bill.day
+      }
     end
 
     it do
