@@ -11,6 +11,7 @@ class Calendar.IndexController extends Global.GenericController
     this.firstDate = new Date(response.data.firstDate)
     this.lastDate = new Date(response.data.lastDate)
     this.beginningOfWeek = this.firstDate.beginningOfWeek()
+    this.payments = response.data.payments
     this.weeks = this._calculateWeeks()
 
     this._buildCalendar()
