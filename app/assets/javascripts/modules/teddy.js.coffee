@@ -1,3 +1,5 @@
+window.Models = {}
+
 module = angular.module('teddy', [
   'ngRoute', 'global', 'calendar'
 ])
