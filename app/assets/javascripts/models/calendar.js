@@ -1,6 +1,4 @@
 (function(_, angular, CalendarModule) {
-  module = angular.module('calendar/calendar', []);
-  
   function Calendar(calendar) {
     _.extend(this, calendar);
 
@@ -15,7 +13,8 @@
     this._buildCalendar();
   }
 
-  var fn = Calendar.prototype;
+  var module = angular.module('calendar/calendar', []),
+      fn = Calendar.prototype;
 
   fn._calculateWeeks = function() {
     start = this.beginningOfWeek;
