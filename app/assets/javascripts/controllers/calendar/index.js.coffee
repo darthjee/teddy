@@ -8,7 +8,7 @@ class Calendar.IndexController extends Global.GenericController
     this._buildWeekHeader()
 
   _setData: (response) =>
-    this.calendar = new Models.Calendar(response.data)
+    this.calendar = new Calendar.Calendar(response.data)
     this.firstDate = new Date(response.data.firstDate)
     this.lastDate = new Date(response.data.lastDate)
     this.beginningOfWeek = this.firstDate.beginningOfWeek()

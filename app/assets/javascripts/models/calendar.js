@@ -1,13 +1,14 @@
-(function(_, angular, Models) {
+(function(_, angular, Calendar) {
+  console.info(Calendar);
   module = angular.module('calendar/calendar', []);
   
-  Models.Calendar = function(calendar) {
+  Calendar.Calendar = function(calendar) {
     _.extend(this, calendar);
   }
   
-  Models.Calendar.Factory = function() {
-    return new Models.Calendar();
+  Calendar.Calendar.Factory = function() {
+    return new Calendar.Calendar();
   }
   
-  module.factory('Calendar', [Models.Calendar.Factory]);
-})(window._, window.angular, window.Models);
+  module.factory('Calendar', [Calendar.Calendar.Factory]);
+})(window._, window.angular, window.Calendar);
