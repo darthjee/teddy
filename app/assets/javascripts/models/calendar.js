@@ -24,7 +24,7 @@
   };
 
   fn._buildCalendar = function() {
-    this.calendar = _.times(this.weeks, this._buildWeek);
+    this.rows = _.times(this.weeks, this._buildWeek);
   };
 
   fn._buildWeek = function(week) {
