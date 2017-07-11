@@ -7,19 +7,19 @@ describe Serializers::Payment do
 
   describe '#as_json' do
     let(:expected) do
-      {
+      hash_including(
         bill_id: bill.id,
         due_date: instance_of(Date),
         id: nil,
         paid: nil,
-        day: bill.day
-      }
+        bill: hash_including(
+          day: instance_of(Integer)
+        )
+      )
     end
 
     it 'returns the serialized payment' do
-      expect(subject.as_json).to match(
-        hash_including(expected)
-      )
+      expect(subject.as_json).to match(expected)
     end
   end
 end
