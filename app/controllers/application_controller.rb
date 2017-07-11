@@ -5,13 +5,14 @@ class ApplicationController < ActionController::Base
     action = params[:action]
     respond_to do |format|
       format.json do
-        render json: export_json(send("#{action}_json").as_json)
+        render json: export_json(send("#{action}_json"))
       end
       format.html { render action }
     end
   end
 
-  def export_json(hash)
+  def export_json(value)
+    hash = value.respond_to?(:change_values) ? value : value.as_json
     hash.change_values(skip_inner: false) do |v|
       case v
       when Date

@@ -21,10 +21,10 @@ describe CalendarController do
       it 'returns the end and start of month' do
         get :index, params: parameters
 
-        expect(response_json).to include(
+        expect(response_json).to match(hash_including(
           first_date: 1488326400000,
           last_date: 1490918400000
-        )
+        ))
       end
 
       context 'user is logged in' do
