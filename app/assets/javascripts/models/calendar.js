@@ -44,4 +44,4 @@
   CalendarModule.Calendar = Calendar;
   
   module.factory('Calendar', [Calendar.Factory]);
-})(window._, window.angular, window.Calendar);
+}(window._, window.angular, window.Calendar));
