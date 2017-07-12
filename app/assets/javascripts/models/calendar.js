@@ -34,10 +34,12 @@
   };
   
   Calendar.Factory = function() {
-    return new Calendar();
-  }
+    return {
+      build: function(json) {
+        return new Calendar(json);
+      }
+    };
+  };
 
-  CalendarModule.Calendar = Calendar;
-  
   module.factory('Calendar', [Calendar.Factory]);
 }(window._, window.angular, window.Calendar));

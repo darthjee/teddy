@@ -1,14 +1,16 @@
 app = angular.module('calendar/index', [
-  'global/generic_requester', 'global/notifier'
+  'global/generic_requester', 'global/notifier',
+  'calendar/calendar'
 ])
 
 class Calendar.IndexController extends Global.GenericController
-  constructor: (requester, notifier) ->
-    super
+  constructor: (requester, notifier, builder) ->
+    super(requester, notifier)
+    this.builder = builder
     this._buildWeekHeader()
 
   _setData: (response) =>
-    this.calendar = new Calendar.Calendar(response.data)
+    this.calendar = this.builder.build(response.data)
 
   _buildWeekHeader: ->
     base = new Date().beginningOfWeek()
@@ -17,7 +19,7 @@ class Calendar.IndexController extends Global.GenericController
     )
 
 app.controller('Calendar.IndexController', [
-  'generic_requester','notifier',
+  'generic_requester','notifier','Calendar'
   Calendar.IndexController
 ])
 
