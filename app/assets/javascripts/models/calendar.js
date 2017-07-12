@@ -27,14 +27,10 @@
   };
 
   fn._buildWeek = function(week) {
-    firstDay = this.beginningOfWeek;
+    firstDay = this.beginningOfWeek.addDays(week * 7);
+    var builder = new CalendarModule.DayBuilder(firstDay);
 
-    return _.times(7, function(weekDay) {
-      date = firstDay.addDays(week * 7 + weekDay)
-      return {
-        day: date.getDate()
-      }
-    });
+    return _.times(7, builder.build);
   };
   
   Calendar.Factory = function() {
