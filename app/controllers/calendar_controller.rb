@@ -2,7 +2,8 @@ class CalendarController < ApplicationController
   include Common::User
   include Common::Redirection
 
-  delegate :beginning_of_month, :end_of_month, to: :month_date
+  delegate :distant_date?, to: :calendar
+  before_action :build_payments, only: :index
 
   DAYS_PER_WEEK=7
 
@@ -13,14 +14,16 @@ class CalendarController < ApplicationController
   private
 
   def index_json
-    {
-      first_date: beginning_of_month,
-      last_date: end_of_month
-    }
+    Serializers::Calendar.new(calendar).as_json(include: 'payments.bill')
   end
 
-  def month_date
-    @month_date ||= Date.new(year, month, 1)
+  def build_payments
+    return unless distant_date?
+    calendar.build_payments
+  end
+
+  def calendar
+    Calendar.new(year, month, logged_user)
   end
 
   def month

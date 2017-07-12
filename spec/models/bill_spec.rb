@@ -2,7 +2,50 @@ require 'spec_helper'
 
 describe Bill do
   describe 'scopes' do
-    describe 'active' do
+    describe '.without_payment_for_month' do
+      let(:month_date) { Date.new(2017, 03, 01) }
+      let(:bill_day) { 10 }
+      let(:bill) { create(:bill, day: bill_day) }
+      let(:bills) { described_class.without_payment_for_month(month_date) }
+
+      context 'when there are no payments for the bill' do
+        it_behaves_like 'without_payment_for_month returns the bill'
+      end
+
+      context 'when there is a payment for the bill' do
+        before do
+          bill.create_payment(payment_date)
+        end
+
+        context 'and the date is before the month' do
+          let(:payment_date) { month_date - 1.month }
+          it_behaves_like 'without_payment_for_month returns the bill'
+        end
+
+        context 'and the date is after the month' do
+          let(:payment_date) { month_date + 1.month }
+          it_behaves_like 'without_payment_for_month returns the bill'
+        end
+
+        context 'and the date is within the month' do
+          let(:payment_date) { month_date }
+
+          it_behaves_like 'without_payment_for_month does not return the bill'
+
+          context 'and the bill is for the beggining of month' do
+            let(:day) { month_date.beginning_of_month.day }
+            it_behaves_like 'without_payment_for_month does not return the bill'
+          end
+
+          context 'and the bill is for the end of month' do
+            let(:day) { month_date.end_of_month.day }
+            it_behaves_like 'without_payment_for_month does not return the bill'
+          end
+        end
+      end
+    end
+
+    describe '.active' do
       it 'scope exist' do
         expect(described_class.active.count).not_to be(described_class.count)
       end
@@ -119,6 +162,8 @@ describe Bill do
         subject.create_payment(month_date)
       end.to change(Payment, :count)
     end
+
+    it_behaves_like  'a method that builds a payment for a given dare', :create_payment
   end
 
   describe '#build_payment' do
@@ -127,9 +172,6 @@ describe Bill do
     end
     let(:subject) { bills(:active) }
     let(:month_date) { Date.today }
-    let(:beginning_of_month) { month_date.beginning_of_month }
-    let(:end_of_month) { month_date.end_of_month }
-    let(:built_payment) { subject.build_payment(month_date + 1.month) }
 
     it do
       expect do
@@ -137,22 +179,6 @@ describe Bill do
       end.not_to change(Payment, :count)
     end
 
-    it 'builds for the same day' do
-      expect(built_payment.due_date.day).to eq(subject.day)
-    end
-
-    it 'does not create for current date' do
-      expect(built_payment.due_date).not_to be_between(beginning_of_month, end_of_month)
-    end
-
-    it 'creates for month given date' do
-      expect(built_payment.due_date).to be_between(beginning_of_month + 1.month, end_of_month + 1.month)
-    end
-
-    context 'when date is not supplied' do
-      it 'creates for the current month' do
-        expect(subject.build_payment.due_date).to be_between(beginning_of_month, end_of_month)
-      end
-    end
+    it_behaves_like  'a method that builds a payment for a given dare', :build_payment
   end
 end

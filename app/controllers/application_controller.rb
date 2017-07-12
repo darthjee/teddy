@@ -11,8 +11,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def export_json(hash)
-    hash.change_values do |v|
+  def export_json(value)
+    hash = value.respond_to?(:change_values) ? value : value.as_json
+    hash.change_values(skip_inner: false) do |v|
       case v
       when Date
         v.to_time.to_i * 1000
@@ -21,6 +22,10 @@ class ApplicationController < ActionController::Base
       else
         v
       end
-    end.lower_camelize_keys
+    end.lower_camelize_keys!
+  end
+
+  def logged_user
+    User.first
   end
 end

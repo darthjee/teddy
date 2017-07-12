@@ -1,7 +1,7 @@
 class Payment < ApplicationRecord
   belongs_to :bill
 
-  def self.period(start_of_month, end_of_month = nil)
+  scope :period, -> (start_of_month, end_of_month = nil) do
     unless end_of_month
       start_of_month = start_of_month.beginning_of_month
       end_of_month = start_of_month.end_of_month

@@ -1,3 +1,15 @@
 first:
   user_id: 1
   bill_id: 1
+
+expired:
+  user_id: 1
+  bill_id: 2
+
+not_started:
+  user_id: 1
+  bill_id: 3
+
+inactive:
+  user_id: 1
+  bill_id: 4

@@ -3,7 +3,7 @@
       {{ weekday }}
   </div>
 </div>
-<div class="row" ng-repeat="week in controller.calendar">
+<div class="row" ng-repeat="week in controller.calendar.rows">
   <div class="col-md-1 col-sm-1" ng-repeat="date in week">
       {{ date.day }}
   </div>
