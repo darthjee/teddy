@@ -1,11 +1,12 @@
 (function(_, angular, CalendarModule) {
-  function Calendar(calendar) {
+  function Calendar(calendar, dayBuilderFactory) {
     _.extend(this, calendar);
 
     this.firstDate = new Date(calendar.firstDate);
     this.lastDate = new Date(calendar.lastDate);
     this.beginningOfWeek = this.firstDate.beginningOfWeek();
     this.payments = calendar.payments;
+    this.dayBuilderFactory = dayBuilderFactory;
     this.weeks = this._calculateWeeks();
 
     _.bindAll(this, '_buildWeek');
@@ -13,7 +14,7 @@
     this._buildCalendar();
   }
 
-  var module = angular.module('calendar/calendar', []),
+  var module = angular.module('calendar/calendar', ['calendar/day_builder']),
       fn = Calendar.prototype;
 
   fn._calculateWeeks = function() {
@@ -28,18 +29,18 @@
 
   fn._buildWeek = function(week) {
     firstDay = this.beginningOfWeek.addDays(week * 7);
-    var builder = new CalendarModule.DayBuilder(firstDay);
+    var builder = this.dayBuilderFactory.build(firstDay);
 
     return _.times(7, builder.build);
   };
   
-  Calendar.Factory = function() {
+  Calendar.Factory = function(dayBuilderFactory) {
     return {
       build: function(json) {
-        return new Calendar(json);
+        return new Calendar(json, dayBuilderFactory);
       }
     };
   };
 
-  module.factory('Calendar', [Calendar.Factory]);
+  module.factory('Calendar', ['DayBuilder', Calendar.Factory]);
 }(window._, window.angular, window.Calendar));
