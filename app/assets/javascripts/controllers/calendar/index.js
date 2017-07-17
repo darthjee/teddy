@@ -27,7 +27,7 @@
     });
   };
 
-  Calendar.IndexController = IndexController;
+  CalendarModule.IndexController = IndexController;
   app.controller('Calendar.IndexController', [
     'generic_requester','notifier','Calendar',
     IndexController
