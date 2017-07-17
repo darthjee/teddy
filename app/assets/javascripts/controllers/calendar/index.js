@@ -18,16 +18,18 @@
 
   fn._setData = function(response) {
     this.calendar = this.builder.build(response.data);
-  }
+  };
 
   fn._buildWeekHeader = function() {
     var base = new Date().beginningOfWeek();
+
     this.weekHeader = _.times(7, function(days) {
-      return base.addDays(days).toLocaleFormat('%a')
+      return base.addDays(days).toLocaleFormat('%a');
     });
   };
 
   CalendarModule.IndexController = IndexController;
+
   app.controller('Calendar.IndexController', [
     'generic_requester','notifier','Calendar',
     IndexController

@@ -1,5 +1,5 @@
 (function(angular) {
-  window.Calendar = {}
+  window.Calendar = {};
 
   angular.module('calendar', [
     'calendar/index'

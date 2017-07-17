@@ -55,7 +55,7 @@
 
   Router.Builder = function($routeProvider) {
     new Router($routeProvider)._bindRoutes();
-  }
+  };
 
   app.config(['$routeProvider', Router.Builder]);
 }(window._, window.angular));

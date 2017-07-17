@@ -4,8 +4,8 @@
   clazz.fromString = function(string) {
     [year, month, day] = _.map(string.split('-'), function(s) {
       return Number.parseInt(s);
-    })
-    return new Date(year, month-1, day)
+    });
+    return new Date(year, month-1, day);
   };
 
   clazz.DAYMILISECONDS = 24 * 3600 * 1000;
@@ -30,8 +30,9 @@
 
   fn.daysUntil = function(date) {
     var days;
+
     if (this.isAfter(date)) {
-      days = - date.daysUntil(this)
+      days = - date.daysUntil(this);
     } else {
       days = ((date - this) / clazz.DAYMILISECONDS);
     }

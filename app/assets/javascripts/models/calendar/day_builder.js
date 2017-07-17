@@ -8,7 +8,7 @@
       fn = DayBuilder.prototype;
 
   fn.build = function(weekDay) {
-    date = this.firstDay.addDays(weekDay)
+    date = this.firstDay.addDays(weekDay);
     return {
       day: date.getDate()
     }
