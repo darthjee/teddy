@@ -1,6 +1,8 @@
 FROM ruby:2.4.0
 
 WORKDIR /home/app/teddy
+ENV PATH "$PATH:/home/app/teddy/node_modules/phantomjs/lib/phantom/bin/"
+
 RUN useradd -u 1000 app
 RUN chown app.app /home/app
 ADD Gemfile* /home/app/teddy/
@@ -12,3 +14,4 @@ RUN gem install bundler
 RUN bundle install --clean
 
 USER app
+ENV PATH "$PATH:/home/app/teddy/node_modules/phantomjs/lib/phantom/bin/"
