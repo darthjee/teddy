@@ -38,6 +38,15 @@ services:
     environment:
       - RAILS_ENV=test
 
+  teddy_jasmine:
+    <<: *base
+    container_name: teddy_jasmine
+    command: /bin/bash bin/jasmine.sh
+    environment:
+      - RAILS_ENV=test
+    ports:
+      - :3000:3000
+
   teddy_root:
     <<: *base
     user: root
