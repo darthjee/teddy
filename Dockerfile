@@ -7,6 +7,7 @@ ADD Gemfile* /home/app/teddy/
 
 RUN apt-get update && apt-get install -y netcat nodejs-legacy npm
 RUN npm install bower -g
+RUN npm install phantomjs
 RUN gem install bundler
 RUN bundle install --clean
 
