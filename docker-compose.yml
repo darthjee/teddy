@@ -38,16 +38,7 @@ services:
     environment:
       - RAILS_ENV=test
     ports:
-      - :8888:8888
-
-  teddy_jasmine:
-    <<: *base
-    container_name: teddy_tests
-    command: /bin/bash bin/tests.sh jasmine
-    environment:
-      - RAILS_ENV=test
-    ports:
-      - :8888:8888
+      - localhost:8888:8888
 
   teddy_root:
     <<: *base
