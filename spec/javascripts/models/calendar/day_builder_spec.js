@@ -1,10 +1,17 @@
 describe("Calendar.DayBuilder", function() {
+  enhance(this)
+
   var describedClass,
       subject, firstDay;
 
+  this.let('firstDay', function() {
+    return new Date(2017, 05, 03);
+  });
+
+
+  firstDay = this.values().firstDay;
   beforeEach(function() {
     describedClass = Calendar.DayBuilder;
-    firstDay = new Date(2017, 05, 03);
     subject = new describedClass(firstDay);
   });
 
