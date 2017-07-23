@@ -1,9 +1,11 @@
 describe("Calendar.DayBuilder", function() {
-  var subject, firstDay;
+  var describedClass,
+      subject, firstDay;
 
   beforeEach(function() {
+    describedClass = Calendar.DayBuilder;
     firstDay = new Date(2017, 05, 03);
-    subject = new Calendar.DayBuilder(firstDay);
+    subject = new describedClass(firstDay);
   });
 
   describe('#build', function() {
