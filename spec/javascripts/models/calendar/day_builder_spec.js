@@ -16,6 +16,15 @@ describe("Calendar.DayBuilder", function() {
           expect(subject.build(0)).toEqual({ day: firstDay.getDate() });
         }
       });
+
+      describe ('when passing the whole month as argument', function(){
+        it ('returns the same day', function() {
+          with(this) {
+            var subject = this.buildSubject();
+            expect(subject.build(30)).toEqual({ day: firstDay.getDate() });
+          }
+        });
+      });
     });
   });
 });
