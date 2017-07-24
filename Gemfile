@@ -32,9 +32,9 @@ gem 'tarquinn', '0.1.0'
 gem 'mini_magick'
 gem 'recursive-open-struct'
 gem 'active_model_serializers'
-gem 'jasmine'
 
 group :development, :test do
+  gem 'jasmine'
   gem 'factory_girl'
   gem 'rspec-rails'
   gem 'pry-rails'
