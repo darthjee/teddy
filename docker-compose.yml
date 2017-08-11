@@ -3,11 +3,12 @@ services:
   teddy_postgres:
     image: postgres:9.5
     container_name: teddy_postgres
+    env_file: .env
     environment:
       POSTGRES_USER: teddy
       POSTGRES_PASSWORD: teddy
     ports:
-      - :5432:5432
+      - :$TEDDY_POSTGRES_PORT:5432
 
   #################### Base  ####################
 
@@ -30,6 +31,7 @@ services:
       - :3000:3000
     environment:
       - RAILS_ENV=development
+      - TEDDY_POSTGRES_PORT=5432
 
   teddy_tests:
     <<: *base
