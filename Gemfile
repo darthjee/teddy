@@ -35,7 +35,7 @@ gem 'active_model_serializers'
 
 group :development, :test do
   gem 'jasmine'
-  gem 'jasmine-core', github: 'jasmine/jasmine'
+  gem 'jasmine-core'
   gem 'factory_girl'
   gem 'rspec-rails'
   gem 'pry-rails'

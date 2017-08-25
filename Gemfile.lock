@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/jasmine/jasmine.git
-  revision: 1d4a2b5c22d19f887df0cd82436e1239e584cf9c
-  specs:
-    jasmine-core (2.6.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -98,6 +92,7 @@ GEM
       phantomjs
       rack (>= 1.2.1)
       rake
+    jasmine-core (2.8.0)
     jquery-rails (4.2.2)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -256,7 +251,7 @@ DEPENDENCIES
   devise
   factory_girl
   jasmine
-  jasmine-core!
+  jasmine-core
   jquery-rails
   listen
   mini_magick
