@@ -1,8 +1,9 @@
 {
   "name": "teddy",
   "dependencies": {
-    "angular": "1.6.3",
-    "angular-route": "1.6.3",
+    "angular": "1.6.5",
+    "angular-route": "1.6.5",
+    "angular-mocks": "1.6.5",
     "underscore": "1.8.3",
     "bootstrap-sass": "3.3.7",
     "bootstrap": "3.3.7",

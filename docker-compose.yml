@@ -3,11 +3,12 @@ services:
   teddy_postgres:
     image: postgres:9.5
     container_name: teddy_postgres
+    env_file: .env
     environment:
       POSTGRES_USER: teddy
       POSTGRES_PASSWORD: teddy
     ports:
-      - :5432:5432
+      - localhost:$TEDDY_POSTGRES_PORT:5432
 
   #################### Base  ####################
 
@@ -30,6 +31,7 @@ services:
       - :3000:3000
     environment:
       - RAILS_ENV=development
+      - TEDDY_POSTGRES_PORT=5432
 
   teddy_tests:
     <<: *base
@@ -37,6 +39,8 @@ services:
     command: /bin/bash bin/tests.sh
     environment:
       - RAILS_ENV=test
+    ports:
+      - localhost:8888:8888
 
   teddy_root:
     <<: *base

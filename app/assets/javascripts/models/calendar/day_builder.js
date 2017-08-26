@@ -22,5 +22,6 @@
     };
   };
 
+  window.Calendar.DayBuilder  = DayBuilder;
   module.factory('DayBuilder', [DayBuilder.Factory]);
 }(window._, window.angular));
