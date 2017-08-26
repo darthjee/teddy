@@ -1,11 +1,10 @@
-(function(_, angular, CalendarModule) {
+(function(_, angular) {
   function Calendar(calendar, dayBuilderFactory) {
     _.extend(this, calendar);
 
     this.firstDate = new Date(calendar.firstDate);
     this.lastDate = new Date(calendar.lastDate);
     this.beginningOfWeek = this.firstDate.beginningOfWeek();
-    this.payments = calendar.payments;
     this.dayBuilderFactory = dayBuilderFactory;
     this.weeks = this._calculateWeeks();
 
@@ -42,5 +41,6 @@
     };
   };
 
+  window.Calendar = Calendar
   module.factory('Calendar', ['DayBuilder', Calendar.Factory]);
-}(window._, window.angular, window.Calendar));
+}(window._, window.angular));

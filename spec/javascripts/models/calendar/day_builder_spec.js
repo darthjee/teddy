@@ -5,7 +5,7 @@ describe("Calendar.DayBuilder", function() {
 
     this.buildSubject = function() {
       return new this.describedClass(this.firstDay);
-    }
+    };
   });
 
   describe('#build', function() {
