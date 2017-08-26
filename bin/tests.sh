@@ -30,7 +30,6 @@ case $ARG in
     echo all
     do_db
     do_rspec
-    do_ci
     ;;
   rspec)
     echo rspec
