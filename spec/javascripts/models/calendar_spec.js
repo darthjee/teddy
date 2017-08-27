@@ -17,28 +17,24 @@ describe("Calendar", function() {
         this.builderFactory
       );
     };
+
+    this.buildSubject();
   });
 
   describe('#firsDate', function() {
     it('converts firstDate to Date', function(){
-      this.buildSubject();
-
       expect(this.subject.firstDate).toEqual(new Date(2012, 0, 1));
     });
   });
 
   describe('#lastDate', function() {
     it('converts lastDate to Date', function(){
-      this.buildSubject();
-
       expect(this.subject.lastDate).toEqual(new Date(2012, 0, 31));
     });
   });
 
   describe('#payments', function(){
     it ('returns the given payments unwrapped', function() {
-      this.buildSubject();
-
       expect(this.subject.payments).toEqual(this.payments);
     });
   });
@@ -47,22 +43,16 @@ describe("Calendar", function() {
     describe('when the menth is the beggining of the month is the beginning of the week', function() {
       describe('the first date', function() {
         it('has 5 weeks', function() {
-          this.buildSubject();
-
           expect(this.subject.rows.length).toEqual(5);
         });
 
         it('is the beggining of the month', function() {
-          this.buildSubject();
-
           expect(this.subject.rows[0][0]).toEqual({ day: 1 });
         });
       });
 
       describe('the last date', function() {
         it('is the end of the week after the end of the month', function() {
-          this.buildSubject();
-
           expect(this.subject.rows[4][6]).toEqual({ day: 4 });
         });
       });
@@ -77,26 +67,20 @@ describe("Calendar", function() {
             payments: this.payments
           };
         };
+        this.buildSubject();
       });
 
       describe('the first date', function() {
         it('has 5 weeks', function() {
-          this.buildSubject();
-
           expect(this.subject.rows.length).toEqual(5);
         });
 
         it('is within the last month', function() {
-          console.info(this.buildJsonCalendar().lastDate);
-          this.buildSubject();
-
           expect(this.subject.rows[0][0]).toEqual({ day: 29 });
         });
       });
       describe('the last date', function() {
         it('is the end of the week after the end of the month', function() {
-          this.buildSubject();
-
           expect(this.subject.rows[4][6]).toEqual({ day: 3 });
         });
       });
@@ -111,27 +95,21 @@ describe("Calendar", function() {
             payments: this.payments
           };
         };
+        this.buildSubject();
       });
 
       describe('the first date', function() {
         it('has 5 weeks', function() {
-          this.buildSubject();
-
           expect(this.subject.rows.length).toEqual(5);
         });
 
         it('is within the last month', function() {
-          console.info(this.buildJsonCalendar().lastDate);
-          this.buildSubject();
-
           expect(this.subject.rows[0][0]).toEqual({ day: 26 });
         });
       });
 
       describe('the last date', function() {
         it('is the end of the month', function() {
-          this.buildSubject();
-
           expect(this.subject.rows[4][6]).toEqual({ day: 31 });
         });
       });
