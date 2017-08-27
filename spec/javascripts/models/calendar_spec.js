@@ -114,5 +114,34 @@ describe("Calendar", function() {
         });
       });
     });
+
+    describe('when the month fits perfectly within 4 weeks', function() {
+      beforeEach(function() {
+        this.buildJsonCalendar = function() {
+          return {
+            firstDate: 1422748800000,
+            lastDate:  1425081600000,
+            payments: this.payments
+          };
+        };
+        this.buildSubject();
+      });
+
+      describe('the first date', function() {
+        it('has 4 weeks', function() {
+          expect(this.subject.rows.length).toEqual(4);
+        });
+
+        it('is within the last month', function() {
+          expect(this.subject.rows[0][0]).toEqual({ day: 1 });
+        });
+      });
+
+      describe('the last date', function() {
+        it('is the end of the month', function() {
+          expect(this.subject.rows[3][6]).toEqual({ day: 28 });
+        });
+      });
+    });
   });
 });
