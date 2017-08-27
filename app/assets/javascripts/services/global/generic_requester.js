@@ -17,6 +17,8 @@
     return this.http.get(this.path);
   };
 
+  Global.GenericRequesterService = GenericRequesterService;
+
   module.service('generic_requester', [
     '$location','$http',
     GenericRequesterServiceFactory

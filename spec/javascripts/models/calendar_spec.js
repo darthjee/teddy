@@ -1,7 +1,7 @@
 describe("Calendar", function() {
   beforeEach(function() {
     this.describedClass = Calendar;
-    this.builderFactory = new Calendar.DayBuilder.Factory;
+    this.builderFactory = new Calendar.DayBuilder.Factory();
     this.payments = [{ id: 1 }];
     this.buildJsonCalendar = function() {
       return {
