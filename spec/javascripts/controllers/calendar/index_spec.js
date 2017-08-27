@@ -18,9 +18,7 @@ describe("Calendar.IndexController", function() {
       return this.response;
     };
 
-    this.promise = new Promise(function(resolve, fail){
-      resolve(that.buildResponse());
-    });
+    this.promise = new Deferred();
 
     this.http = { get: function() { return that.promise } };
 
@@ -35,11 +33,11 @@ describe("Calendar.IndexController", function() {
     };
 
     this.buildSubject();
+    this.promise.resolve(this.buildResponse());
   });
 
-  describe('', function() {
+  describe('when everything is a success', function() {
     it('builds a calendar', function() {
-      console.info('a');
       expect(this.subject.calendar.rows.length).toEqual(4);
     });
   });
