@@ -1,6 +1,6 @@
 (function(_, angular, CalendarModule, Global) {
   function IndexController (requester, notifier, builder) {
-    this.contruct(requester, notifier);
+    this.construct(requester, notifier);
     this.builder = builder;
 
     this._buildWeekHeader();

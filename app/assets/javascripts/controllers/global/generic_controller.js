@@ -8,7 +8,7 @@
         'global/generic_requester', 'global/notifier'
       ]);
 
-  fn.contruct = function(requester, notifier) {
+  fn.construct = function(requester, notifier) {
     this.requester = requester;
     this.notifier = notifier;
 
