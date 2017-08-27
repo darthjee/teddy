@@ -103,4 +103,54 @@ describe('Date', function() {
       });
     });
   });
+
+  describe('#endOfWeek', function() {
+    describe('when date is one day before friday', function() {
+      beforeEach(function() {
+        this.day = 9;
+
+        this.buildSubject();
+      });
+
+      it('returns the end of the week as monday', function() {
+        expect(this.subject.endOfWeek().getDay()).toEqual(6);
+      });
+
+      it('returns the end of the week date', function() {
+        expect(this.subject.endOfWeek()).toEqual(new Date(2017, 10, 11));
+      });
+    });
+
+    describe('when date is saturday', function() {
+      beforeEach(function() {
+        this.day = 11;
+
+        this.buildSubject();
+      });
+
+      it('returns the end of the week as monday', function() {
+        expect(this.subject.endOfWeek().getDay()).toEqual(6);
+      });
+
+      it('returns the same day', function() {
+        expect(this.subject.endOfWeek()).toEqual(this.subject);
+      });
+    });
+
+    describe('when date is sunday', function() {
+      beforeEach(function() {
+        this.day = 5;
+
+        this.buildSubject();
+      });
+
+      it('returns the end of the week as monday', function() {
+        expect(this.subject.endOfWeek().getDay()).toEqual(6);
+      });
+
+      it('returns the next saturday', function() {
+        expect(this.subject.endOfWeek()).toEqual(new Date(2017, 10, 11));
+      });
+    });
+  });
 });
