@@ -153,4 +153,66 @@ describe('Date', function() {
       });
     });
   });
+
+  describe('#daysUntil', function() {
+    beforeEach(function () {
+      this.dateMonth = this.month;
+      this.dateDay = this.day;
+
+      this.buildDate = function() {
+        this.date = new Date(2017, this.dateMonth, this.dateDay);
+      };
+      this.buildDate();
+    });
+
+    describe('when using the same date', function() {
+      it('returns 0', function() {
+        expect(this.subject.daysUntil(this.date)).toEqual(0);
+      });
+    });
+
+    describe('when using a one day ahead date', function() {
+      beforeEach(function() {
+        this.dateDay = this.day + 1;
+        this.buildDate();
+      });
+
+      it('returns 1', function() {
+        expect(this.subject.daysUntil(this.date)).toEqual(1);
+      });
+    });
+
+    describe('when using a one day before date', function() {
+      beforeEach(function() {
+        this.dateDay = this.day - 1;
+        this.buildDate();
+      });
+
+      it('returns -1', function() {
+        expect(this.subject.daysUntil(this.date)).toEqual(-1);
+      });
+    });
+
+    describe('when using the same day for the next month', function() {
+      beforeEach(function() {
+        this.dateMonth = this.month + 1;
+        this.buildDate();
+      });
+
+      it('returns the full month', function() {
+        expect(this.subject.daysUntil(this.date)).toEqual(30);
+      });
+    });
+
+    describe('when using the same day for 2 months ahead', function() {
+      beforeEach(function() {
+        this.dateMonth = this.month + 2;
+        this.buildDate();
+      });
+
+      it('returns 61 days', function() {
+        expect(this.subject.daysUntil(this.date)).toEqual(61);
+      });
+    });
+  });
 });
