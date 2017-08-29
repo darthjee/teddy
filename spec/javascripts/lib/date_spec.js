@@ -2,12 +2,18 @@ describe('Date', function() {
   beforeEach(function() {
     this.day = 4;
     this.month = 10;
+    this.dateMonth = this.month;
+    this.dateDay = this.day;
 
+    this.buildDate = function() {
+      this.date = new Date(2017, this.dateMonth, this.dateDay);
+    };
     this.buildSubject = function() {
       return this.subject = new Date(2017, this.month, this.day);
     };
 
     this.buildSubject();
+    this.buildDate();
   });
 
   describe('.fromString', function() {
@@ -155,16 +161,6 @@ describe('Date', function() {
   });
 
   describe('#daysUntil', function() {
-    beforeEach(function () {
-      this.dateMonth = this.month;
-      this.dateDay = this.day;
-
-      this.buildDate = function() {
-        this.date = new Date(2017, this.dateMonth, this.dateDay);
-      };
-      this.buildDate();
-    });
-
     describe('when using the same date', function() {
       it('returns 0', function() {
         expect(this.subject.daysUntil(this.date)).toEqual(0);
@@ -212,6 +208,58 @@ describe('Date', function() {
 
       it('returns 61 days', function() {
         expect(this.subject.daysUntil(this.date)).toEqual(61);
+      });
+    });
+  });
+
+  describe('#isAfter', function() {
+    describe('when using the same date', function() {
+      it('returns false', function() {
+        expect(this.subject.isAfter(this.date)).toBeFalsy();
+      });
+    });
+
+    describe('when using the day before', function() {
+      beforeEach(function() {
+        this.dateDay = this.day - 1;
+        this.buildDate();
+      });
+
+      it('returns false', function() {
+        expect(this.subject.isAfter(this.date)).toBeTruthy();
+      });
+    });
+
+    describe('whien using a day after', function() {
+      beforeEach(function() {
+        this.dateDay = this.day + 1;
+        this.buildDate();
+      });
+
+      it('returns false', function() {
+        expect(this.subject.isAfter(this.date)).toBeFalsy();
+      });
+    });
+
+    describe('when using the month before', function() {
+      beforeEach(function() {
+        this.dateMonth = this.month - 1;
+        this.buildDate();
+      });
+
+      it('returns false', function() {
+        expect(this.subject.isAfter(this.date)).toBeTruthy();
+      });
+    });
+
+    describe('whien using a month after', function() {
+      beforeEach(function() {
+        this.dateMonth = this.month + 1;
+        this.buildDate();
+      });
+
+      it('returns false', function() {
+        expect(this.subject.isAfter(this.date)).toBeFalsy();
       });
     });
   });
