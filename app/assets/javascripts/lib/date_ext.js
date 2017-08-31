@@ -47,7 +47,7 @@
     var days = this.daysUntil(date),
         weeks = Math.ceil((days)/ 7);
 
-    if (weeks == -0) {
+    if (weeks === -0) {
       weeks = 0;
     }
     return weeks;
