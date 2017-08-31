@@ -3,7 +3,7 @@
 
   clazz.fromString = function(string) {
     [year, month, day] = _.map(string.split('-'), function(s) {
-      return Number.parseInt(s);
+      return Number.parseInt(s, 10);
     });
     return new Date(year, month-1, day);
   };
@@ -44,9 +44,13 @@
   }
 
   fn.weeksUntil = function(date) {
-    var days = this.daysUntil(date);
+    var days = this.daysUntil(date),
+        weeks = Math.ceil((days)/ 7);
 
-    return Math.ceil((days)/ 7);
+    if (weeks === -0) {
+      weeks = 0;
+    }
+    return weeks;
   };
 }(Date));
 

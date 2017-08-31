@@ -20,5 +20,6 @@
 //= require bootstrap
 //= require modules/teddy
 //= require_tree ./modules
+//= require_tree ./models
 //= require controllers/global/generic_controller
 //= require_tree .

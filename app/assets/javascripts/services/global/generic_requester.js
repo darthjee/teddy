@@ -1,4 +1,4 @@
-(function(_, angular, undefined) {
+(function(_, angular) {
   function GenericRequesterServiceFactory($location, $http) {
     var path = $location.$$path + '.json';
     return new GenericRequesterService(path, $http);
@@ -16,6 +16,8 @@
   fn.request = function(callback) {
     return this.http.get(this.path);
   };
+
+  Global.GenericRequesterService = GenericRequesterService;
 
   module.service('generic_requester', [
     '$location','$http',
