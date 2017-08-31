@@ -263,4 +263,203 @@ describe('Date', function() {
       });
     });
   });
+
+  describe('#weeksUntil', function() {
+    describe('when subject is the end of the week',  function() {
+      describe('when passing the same date', function() {
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(0);
+        });
+      });
+
+      describe('when passing 1 day ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 1;
+          this.buildDate();
+        });
+
+        it('returns 1', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(1);
+        });
+      });
+
+      describe('when passing 6 days ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 6;
+          this.buildDate();
+        });
+
+        it('returns 1', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(1);
+        });
+      });
+
+      describe('when passing 7 days ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 7;
+          this.buildDate();
+        });
+
+        it('returns 1', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(1);
+        });
+      });
+
+      describe('when passing 8 days ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 8;
+          this.buildDate();
+        });
+
+        it('returns 2', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(2);
+        });
+      });
+
+      describe('when passing 1 day before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 1;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(0);
+        });
+      });
+
+      describe('when passing 6 days before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 6;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(0);
+        });
+      });
+
+      describe('when passing 7 days before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 7;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(-1);
+        });
+      });
+
+      describe('when passing 8 days before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 8;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(-1);
+        });
+      });
+    });
+
+    describe('when subject is the begining of the week',  function() {
+      beforeEach(function() {
+        this.day = 5;
+        this.buildSubject();
+      });
+
+      describe('when passing the same date', function() {
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(0);
+        });
+      });
+
+      describe('when passing 1 day ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 1;
+          this.buildDate();
+        });
+
+        it('returns 1', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(1);
+        });
+      });
+
+      describe('when passing 6 days ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 6;
+          this.buildDate();
+        });
+
+        it('returns 1', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(1);
+        });
+      });
+
+      describe('when passing 7 days ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 7;
+          this.buildDate();
+        });
+
+        it('returns 2', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(1);
+        });
+      });
+
+      describe('when passing 8 days ahead', function() {
+        beforeEach(function() {
+          this.dateDay = this.day + 8;
+          this.buildDate();
+        });
+
+        it('returns 1', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(2);
+        });
+      });
+
+      describe('when passing 1 day before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 1;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(0);
+        });
+      });
+
+      describe('when passing 6 days before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 6;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(0);
+        });
+      });
+
+      describe('when passing 7 days before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 7;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(-1);
+        });
+      });
+
+      describe('when passing 8 days before', function() {
+        beforeEach(function() {
+          this.dateDay = this.day - 8;
+          this.buildDate();
+        });
+
+        it('returns 0', function() {
+          expect(this.subject.weeksUntil(this.date)).toEqual(-1);
+        });
+      });
+    });
+  });
 });
