@@ -8,8 +8,9 @@ RUN chown app.app /home/app
 ADD Gemfile* /home/app/teddy/
 
 RUN apt-get update && apt-get install -y netcat nodejs-legacy npm
-RUN npm install bower -g
+RUN npm install bower grunt-cli -g
 RUN npm install phantomjs
+RUN npm install grunt
 RUN gem install bundler
 RUN bundle install --clean
 
