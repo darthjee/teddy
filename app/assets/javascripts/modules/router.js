@@ -28,7 +28,7 @@
   };
 
   fn._setRouteConfig = function(config, route) {
-    if (typeof route != 'string') {
+    if (typeof route !== 'string') {
       route = config;
       config = {};
     }
@@ -42,11 +42,13 @@
 
   fn._buildTemplateFor = function(route) {
     return function(params) {
-      if (params != undefined) {
+      if (params !== undefined) {
         for (key in params) {
-          value = params[key];
-          regexp = new RegExp(':' + key + '\\b');
-          route = route.replace(regexp, value);
+          if (params.hasOwnProperty(key)) {
+            value = params[key];
+            regexp = new RegExp(':' + key + '\\b');
+            route = route.replace(regexp, value);
+          }
         }
       }
       return route + '?ajax=true';

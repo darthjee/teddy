@@ -1,5 +1,5 @@
 (function(_, angular, Global) {
-  module = angular.module('global/notifier', []);
+  var module = angular.module('global/notifier', []);
 
   Global.NotifierServiceFactory = function() {
     return new NotifierService();
@@ -22,7 +22,7 @@
   };
 
   fn.listeners = function(key) {
-    if (this.watchs[key] == undefined) {
+    if (this.watchs[key] === undefined) {
       this.watchs[key] = [];
     }
     return this.watchs[key];

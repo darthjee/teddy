@@ -3,7 +3,7 @@
 
   clazz.fromString = function(string) {
     [year, month, day] = _.map(string.split('-'), function(s) {
-      return Number.parseInt(s);
+      return Number.parseInt(s, 10);
     });
     return new Date(year, month-1, day);
   };
