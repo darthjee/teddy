@@ -23,3 +23,6 @@
 /vendor/assets/bower_components/
 /coverage
 node_modules
+
+gems/*/Gemfile.lock
+gems/*/coverage
