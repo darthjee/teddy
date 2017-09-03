@@ -4,19 +4,19 @@ describe Tsung::User do
   shared_context 'an object that has a secure random code start up' do |*methods|
     methods.each do |method|
       describe "##{method}" do
-        let(:user) { build(:user, method => nil) }
+        subject { build(:user, method => nil) }
 
         context "when the user does not have a #{method}" do
           it do
-            expect { user.public_send("start_#{method}") }.to change(user, method)
+            expect { subject.public_send("start_#{method}") }.to change(subject, method)
           end
         end
 
         context "when the user has a #{method}" do
-          let(:user) { build(:user, method => 'aaaa') }
+          subject { build(:user, method => 'aaaa') }
 
           it do
-            expect { user.public_send("start_#{method}") }.not_to change(user, method)
+            expect { subject.public_send("start_#{method}") }.not_to change(subject, method)
           end
         end
       end
@@ -25,15 +25,36 @@ describe Tsung::User do
 
   it_behaves_like 'an object that has a secure random code start up', :code, :authentication_token
 
-  describe 'create' do
-    let(:user) { build(:user, code: nil, authentication_token: nil) }
+  describe '.create' do
+    subject { build(:user, code: nil, authentication_token: nil) }
 
     it do
-      expect { user.save }.to change(user, :code)
+      expect { subject.save }.to change(subject, :code)
     end
 
     it do
-      expect { user.save }.to change(user, :authentication_token)
+      expect { subject.save }.to change(subject, :authentication_token)
+    end
+  end
+
+  describe '.login' do
+    let(:email) { 'user@server.com' }
+    let!(:user) { create(:user, email: email, password: password) }
+
+    context 'when user does not possess passowrd' do
+      let(:password) {}
+
+      it 'does not retrieve user' do
+        expect(described_class.login(email, password)).to be_nil
+      end
+    end
+
+    context 'when user does possess passowrd' do
+      let(:password) { '12345678' }
+
+      it 'does not retrieve user' do
+        expect(described_class.login(email, password)).to eq(user)
+      end
     end
   end
 end
