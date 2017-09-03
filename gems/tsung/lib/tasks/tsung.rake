@@ -6,8 +6,11 @@ namespace :tsung do
     if user_class
       user_class = user_class.split('/').map(&:camelize).join('::')
       user_class_path = user_class.split('::').map(&:underscore).join('/')
+      user_table = user_class_path.gsub('/','_').pluralize
+
       puts user_class
       puts user_class_path
+      puts user_table
     else
       puts "Usage: rake task #{task}[user_class]"
     end
