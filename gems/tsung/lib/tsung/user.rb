@@ -1,11 +1,20 @@
 require 'active_record'
 
-class Tsung::User < ActiveRecord::Base
-  before_create :start_codesss
+module Tsung::User
+  extend ActiveSupport::Concern
 
-  class << self
-    def login(email, password)
-      where.not(email: nil, password: nil).find_by(email: email, password: encrypt(password))
+  included do
+    before_create :start_codesss
+
+    class << self
+      def login(email, password)
+        where.not(email: nil, password: nil).find_by(email: email, password: encrypt(password))
+      end
+
+      def encrypt(pass)
+        return unless pass.present?
+        Digest::SHA256.hexdigest pass
+      end
     end
   end
 
@@ -45,10 +54,5 @@ class Tsung::User < ActiveRecord::Base
 
   def other_users
     self.class.where('id != ?', id)
-  end
-
-  def self.encrypt(pass)
-    return unless pass.present?
-    Digest::SHA256.hexdigest pass
   end
 end

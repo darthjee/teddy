@@ -45,7 +45,7 @@ describe Tsung::User do
       let(:password) {}
 
       it 'does not retrieve user' do
-        expect(described_class.login(email, password)).to be_nil
+        expect(User.login(email, password)).to be_nil
       end
     end
 
@@ -53,7 +53,7 @@ describe Tsung::User do
       let(:password) { '12345678' }
 
       it 'does not retrieve user' do
-        expect(described_class.login(email, password)).to eq(user)
+        expect(User.login(email, password)).to eq(user)
       end
     end
   end
